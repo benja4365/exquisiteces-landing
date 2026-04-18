@@ -28,7 +28,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Nunito:ital,wght@0,300..800;1,400&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 
   <!-- JSON-LD: Local Business -->
   <script type="application/ld+json">
@@ -73,36 +73,108 @@
   </script>
 
   <style>
-    /* ── TOKENS DE MARCA ─────────────────────────────────── */
+    /* ── TOKENS DE MARCA — Design System v2 ─────────────── */
+    @font-face {
+      font-family: 'Gourmet Le French';
+      src: url('fonts/GourmetLeFrench.otf') format('opentype'),
+           url('fonts/GourmetLeFrench.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
     :root {
-      /* Identidad */
-      --cream:       #F4EDE2;
-      --cream-light: #FAF5EC;
-      --cream-dark:  #E8DECA;
-      --rose:        #E80080;
-      --rose-dark:   #C10069;
-      --espresso:    #1A0D05;
+      /* ── FUCSIA — color maestro (9 años de reconocimiento) ── */
+      --fucsia-900:      #5A0A28;
+      --fucsia-800:      #82103E;
+      --fucsia-700:      #A01048;
+      --fucsia:          #C8185A;   /* ★ canónico */
+      --fucsia-500:      #D83D75;
+      --fucsia-400:      #E85A8E;
+      --fucsia-300:      #F088AE;
+      --fucsia-200:      #F8C4D6;
+      --fucsia-100:      #FCE4EC;
+      --fucsia-50:       #FDF2F6;
 
-      /* Acento cálido */
-      --cinnamon:    #C86428;
-      --borgona:     #7A1535;
+      --fucsia-deep:     var(--fucsia-700);
+      --fucsia-soft:     var(--fucsia-400);
+      --fucsia-pale:     var(--fucsia-100);
+      --fucsia-wash:     var(--fucsia-50);
 
-      /* Natural */
-      --sage:        #4A7850;
+      /* ── NEUTROS CÁLIDOS (ADN fucsia, hue 335°) ─────────── */
+      --cream:           #FBF6F2;
+      --cream-deep:      #F3E8E4;
+      --paper:           #FFFCFA;
+      --ink:             #1F0F16;
+      --ink-soft:        #402530;
+      --ink-mute:        #6D5058;
+      --ink-faint:       #A8909A;
 
-      /* Soporte */
-      --chocolate:   #8A7060;
+      /* ── ACENTOS ARMONIOSOS ──────────────────────────────── */
+      --verde-hierba:    #6B8558;
+      --miel:            #E0A545;
+      --cacao:           #5A3022;
+      --lino:            #D8C4B0;
 
-      /* Sombras */
-      --shadow-warm: rgba(26,13,5,0.10);
-      --shadow-rose: rgba(232,0,128,0.15);
-      --shadow-borgona: rgba(122,21,53,0.15);
+      /* ── SEMÁNTICOS ──────────────────────────────────────── */
+      --fg:              var(--ink);
+      --fg-soft:         var(--ink-soft);
+      --fg-mute:         var(--ink-mute);
+      --fg-faint:        var(--ink-faint);
+      --bg:              var(--cream);
+      --bg-elev:         var(--paper);
+      --bg-alt:          var(--cream-deep);
+      --bg-tint:         var(--fucsia-wash);
+      --border:          rgba(26,18,19,0.10);
+      --border-strong:   rgba(26,18,19,0.22);
 
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-body:    'DM Sans', sans-serif;
+      /* ── ALIASES RETROCOMPAT (transición) ───────────────── */
+      --rose:            var(--fucsia);
+      --rose-dark:       var(--fucsia-700);
+      --espresso:        var(--ink);
+      --cream-light:     var(--paper);
+      --cream-dark:      var(--cream-deep);
+      --cinnamon:        var(--miel);
+      --borgona:         var(--fucsia-900);
+      --sage:            var(--verde-hierba);
+      --chocolate:       var(--ink-mute);
 
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+      /* ── SOMBRAS CÁLIDAS ─────────────────────────────────── */
+      --shadow-xs:       0 1px 2px rgba(26,18,19,0.06);
+      --shadow-sm:       0 2px 6px rgba(26,18,19,0.06), 0 1px 2px rgba(26,18,19,0.04);
+      --shadow-md:       0 8px 20px rgba(26,18,19,0.08), 0 2px 6px rgba(26,18,19,0.05);
+      --shadow-lg:       0 20px 40px rgba(26,18,19,0.10), 0 6px 14px rgba(26,18,19,0.06);
+      --shadow-fucsia:   0 12px 28px rgba(200,24,90,0.22);
+      --shadow-warm:     var(--shadow-sm);
+      --shadow-rose:     var(--shadow-fucsia);
+
+      /* ── RADII ORGÁNICOS ─────────────────────────────────── */
+      --r-xs:   4px;
+      --r-sm:   8px;
+      --r-md:   14px;
+      --r-lg:   22px;
+      --r-xl:   32px;
+      --r-pill: 999px;
+      --r-blob: 62% 38% 54% 46% / 55% 44% 56% 45%;
+
+      /* ── TIPOGRAFÍAS ─────────────────────────────────────── */
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-body:    'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-script:  'Caveat', cursive;
+      --font-logo:    'Gourmet Le French', 'Fraunces', serif;
+
+      /* ── ESPACIADO (4pt base) ────────────────────────────── */
+      --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px; --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px;  --sp-7: 48px; --sp-8: 64px;
+      --sp-9: 96px; --sp-10: 128px;
+
+      /* ── MOTION ──────────────────────────────────────────── */
+      --ease-soft:    cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:  cubic-bezier(0.45, 0, 0.55, 1);
+      --dur-fast:     140ms;
+      --dur-med:      240ms;
+      --dur-slow:     420ms;
     }
 
     /* ── RESET & BASE ────────────────────────────────────── */
@@ -150,12 +222,13 @@
     .no-js .reveal { opacity: 1; transform: none; }
 
     body {
-      background: var(--cream);
-      color: var(--espresso);
+      background: var(--bg);
+      color: var(--fg);
       font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.6;
+      font-weight: 400;
+      line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* Grain texture overlay */
@@ -305,16 +378,18 @@
     .hero-headline {
       font-family: var(--font-display);
       font-size: clamp(3.2rem, 5vw, 5.5rem);
-      font-weight: 300;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
       line-height: 1.0;
-      color: var(--espresso);
+      letter-spacing: -0.02em;
+      color: var(--fg);
       margin-bottom: 12px;
     }
 
     .hero-headline em {
       font-style: italic;
-      color: var(--rose);
-      font-weight: 300;
+      color: var(--fucsia);
+      font-weight: 400;
     }
 
     .hero-subheadline {
@@ -322,7 +397,7 @@
       font-size: clamp(1.6rem, 2.5vw, 2.4rem);
       font-weight: 300;
       font-style: italic;
-      color: var(--chocolate);
+      color: var(--fg-mute);
       margin-bottom: 32px;
       line-height: 1.2;
     }
@@ -377,22 +452,23 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--rose);
-      color: #fff;
+      background: var(--fucsia);
+      color: var(--cream);
       padding: 16px 32px;
-      border-radius: 100px;
+      border-radius: var(--r-pill);
       font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 4px 20px var(--shadow-rose);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background var(--dur-med) var(--ease-soft), transform var(--dur-fast), box-shadow var(--dur-med);
+      box-shadow: var(--shadow-fucsia);
     }
 
     .btn-primary:hover {
-      background: var(--rose-dark);
+      background: var(--fucsia-deep);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--shadow-rose);
+      box-shadow: 0 16px 36px rgba(200,24,90,0.28);
     }
+    .btn-primary:active { transform: scale(0.98); }
 
     .btn-primary svg { width: 18px; height: 18px; }
 
@@ -605,19 +681,21 @@
     .section-title {
       font-family: var(--font-display);
       font-size: clamp(2.4rem, 4vw, 4rem);
-      font-weight: 300;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 120, 'SOFT' 50, 'WONK' 1;
       line-height: 1.1;
-      color: var(--espresso);
+      color: var(--fg);
+      letter-spacing: -0.02em;
     }
 
     .section-title em {
       font-style: italic;
-      color: var(--rose);
+      color: var(--fucsia);
     }
 
     .section-subtitle {
       font-size: 1rem;
-      color: var(--chocolate);
+      color: var(--fg-mute);
       max-width: 520px;
       margin: 16px auto 0;
       line-height: 1.7;
@@ -1883,7 +1961,7 @@
   <header>
   <nav id="nav" role="navigation" aria-label="Navegación principal">
     <div class="nav-logo">
-      <img src="assets/Marca de Agua - Logo principal - Negro y Magenta.png" alt="Exquisiteces by Laura" class="nav-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <img src="assets/logo-oval-negro-magenta.png" alt="Exquisiteces by Laura" class="nav-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
       <span class="nav-logo-text" style="display:none;">Exquisiteces <em>by Laura</em></span>
     </div>
     <ul class="nav-links" id="nav-menu" role="list">
@@ -2490,7 +2568,7 @@
   <!-- FOOTER -->
   <footer role="contentinfo">
     <div class="footer-brand">
-      <img src="assets/Marca de Agua - Logo Rectangular - Magenta.png" alt="Exquisiteces by Laura"
+      <img src="assets/logo-rectangular-negro-magenta.png" alt="Exquisiteces by Laura"
         style="height:90px;width:auto;object-fit:contain;margin-bottom:8px;"
         onerror="this.style.display='none'">
       <p>Pastelería artesanal · Córdoba, Argentina</p>
