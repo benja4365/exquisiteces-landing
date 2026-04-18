@@ -1,620 +1,379 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paleta de Colores — Exquisiteces by Laura</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Color — Exquisiteces by Laura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Nunito:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --fucsia:      #E6007E;
+    --fucsia-deep: #A00D5E;
+    --ink:         #2A1320;
+    --ink-soft:    #48283A;
+    --ink-mute:    #7E586D;
+    --cream:       #F8F6F7;
+    --cream-deep:  #F0EAED;
+    --paper:       #FDFCFC;
+  }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--ink); line-height:1.6; padding-bottom:80px; }
 
-    body {
-      background-color: #F4EDE2;
-      color: #1A0D05;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      line-height: 1.6;
-      padding: 60px 24px 100px;
-    }
+  header { background:var(--ink); padding:48px 40px 40px; text-align:center; }
+  .brand-name { font-family:'Fraunces',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:400; font-variation-settings:'opsz' 120,'SOFT' 50,'WONK' 1; color:var(--cream); letter-spacing:-0.01em; }
+  .brand-name em { color:var(--fucsia); font-style:italic; }
+  .header-sub { font-size:0.78rem; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-mute); margin-top:10px; }
 
-    .wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  main { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .section { margin-top:64px; }
+  .section-label { font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--fucsia); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--cream-deep); }
 
-    /* Header */
-    .header {
-      margin-bottom: 64px;
-      border-bottom: 1px solid #E8DECA;
-      padding-bottom: 40px;
-    }
+  .swatches { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+  .swatches.scale { grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); }
+  .swatches.text-row { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
 
-    .header-eyebrow {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #8A7060;
-      margin-bottom: 12px;
-    }
+  .swatch-card { background:var(--paper); border-radius:16px; overflow:hidden; box-shadow:0 2px 8px rgba(42,19,32,0.08); cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; user-select:none; }
+  .swatch-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(42,19,32,0.13); }
+  .swatch-card:active { transform:scale(0.97); }
+  .swatch-color { height:120px; position:relative; display:flex; align-items:flex-end; padding:10px 14px; }
+  .swatches.scale .swatch-color { height:72px; }
+  .swatches.text-row .swatch-color { height:60px; }
+  .copy-hint { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; opacity:0; transition:opacity 0.2s; padding:4px 8px; border-radius:6px; background:rgba(0,0,0,0.28); color:#fff; }
+  .swatch-card:hover .copy-hint { opacity:1; }
+  .swatch-info { padding:14px 16px 16px; }
+  .swatch-name { font-family:'Fraunces',serif; font-size:0.95rem; font-weight:500; font-style:italic; color:var(--ink); margin-bottom:5px; }
+  .swatch-hex { font-size:1.1rem; font-weight:700; color:var(--ink); letter-spacing:0.04em; margin-bottom:4px; }
+  .swatch-vals { font-size:0.71rem; color:var(--ink-mute); line-height:1.65; }
+  .swatch-use { font-size:0.71rem; color:var(--fucsia-deep); font-weight:700; margin-top:8px; padding-top:8px; border-top:1px solid var(--cream-deep); }
 
-    .header h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 300;
-      line-height: 1.15;
-      color: #1A0D05;
-    }
+  .combos { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:16px; }
+  .combo-card { border-radius:16px; overflow:hidden; box-shadow:0 2px 8px rgba(42,19,32,0.08); }
+  .combo-preview { padding:24px 20px; display:flex; align-items:center; gap:14px; }
+  .combo-dot { width:44px; height:44px; border-radius:50%; flex-shrink:0; }
+  .combo-label { background:var(--paper); padding:10px 16px; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-mute); }
 
-    .header h1 em {
-      font-style: italic;
-      color: #E80080;
-    }
+  .type-demo { background:var(--paper); border-radius:20px; padding:40px; display:grid; grid-template-columns:1fr 1fr; gap:40px; box-shadow:0 2px 8px rgba(42,19,32,0.07); }
+  @media(max-width:600px){ .type-demo{grid-template-columns:1fr;} }
+  .type-block h4 { font-size:0.7rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--fucsia); margin-bottom:18px; }
+  .type-display { font-family:'Fraunces',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:400; font-variation-settings:'opsz' 120,'SOFT' 50,'WONK' 1; color:var(--ink); line-height:1.1; margin-bottom:14px; }
+  .type-display em { color:var(--fucsia); font-style:italic; }
+  .type-body { font-family:'Nunito',sans-serif; font-size:0.95rem; font-weight:400; color:var(--ink-soft); line-height:1.75; }
+  .type-meta { font-size:0.73rem; color:var(--ink-mute); margin-top:16px; line-height:1.9; }
+  .type-meta strong { color:var(--ink-soft); font-weight:700; }
 
-    .header-sub {
-      margin-top: 12px;
-      font-size: 14px;
-      color: #8A7060;
-      font-weight: 300;
-    }
+  .rules { background:var(--ink); border-radius:20px; padding:36px 40px; margin-top:64px; display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:28px; }
+  .rule h5 { font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--fucsia); margin-bottom:10px; }
+  .rule p { font-size:0.82rem; color:rgba(248,246,247,0.55); line-height:1.7; }
+  .rule p strong { color:rgba(248,246,247,0.9); }
 
-    /* Group */
-    .group {
-      margin-bottom: 56px;
-    }
+  footer { text-align:center; margin-top:64px; padding:0 24px; font-size:0.78rem; color:var(--ink-mute); }
+  footer strong { color:var(--fucsia); }
 
-    .group-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .group-title {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: #1A0D05;
-    }
-
-    .group-tag {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #8A7060;
-    }
-
-    .group-divider {
-      width: 100%;
-      height: 1px;
-      background: #E8DECA;
-      margin-bottom: 24px;
-    }
-
-    /* Color grid */
-    .color-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-    }
-
-    /* Color card */
-    .color-card {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #FAF5EC;
-      box-shadow: 0 1px 3px rgba(26,13,5,0.06), 0 4px 12px rgba(26,13,5,0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .color-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 16px rgba(26,13,5,0.10), 0 1px 4px rgba(26,13,5,0.06);
-    }
-
-    .color-swatch {
-      width: 100%;
-      height: 100px;
-    }
-
-    .color-info {
-      padding: 14px 16px 16px;
-    }
-
-    .color-name {
-      font-family: 'Fraunces', serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #1A0D05;
-      line-height: 1.3;
-    }
-
-    .color-hex {
-      font-family: 'DM Sans', monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: #8A7060;
-      margin-top: 3px;
-    }
-
-    .color-desc {
-      font-size: 11.5px;
-      font-weight: 300;
-      color: #8A7060;
-      margin-top: 6px;
-      line-height: 1.4;
-    }
-
-    /* Swatch text overlay (for large swatches) */
-    .swatch-label {
-      width: 100%;
-      height: 100px;
-      display: flex;
-      align-items: flex-end;
-      padding: 10px 12px;
-    }
-
-    .swatch-label .label-hex {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      opacity: 0.55;
-    }
-
-    /* ---- APPLICATION SECTION ---- */
-    .section-title {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(22px, 4vw, 32px);
-      font-weight: 300;
-      color: #1A0D05;
-      margin-bottom: 8px;
-    }
-
-    .section-sub {
-      font-size: 13.5px;
-      color: #8A7060;
-      margin-bottom: 36px;
-    }
-
-    .combos-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .combos-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .combo-card {
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(26,13,5,0.07), 0 4px 14px rgba(26,13,5,0.05);
-    }
-
-    .combo-preview {
-      padding: 28px 24px;
-      min-height: 110px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .combo-preview-label {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 1.25;
-      margin-bottom: 6px;
-    }
-
-    .combo-preview-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 300;
-      opacity: 0.7;
-    }
-
-    .combo-preview-accent {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
-
-    .combo-meta {
-      padding: 14px 20px 16px;
-      background: #FAF5EC;
-      border-top: 1px solid #E8DECA;
-    }
-
-    .combo-name {
-      font-family: 'Fraunces', serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #1A0D05;
-    }
-
-    .combo-swatches {
-      display: flex;
-      gap: 6px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-
-    .combo-dot {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      color: #8A7060;
-    }
-
-    .combo-dot-circle {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid rgba(26,13,5,0.08);
-      flex-shrink: 0;
-    }
-
-    /* Span full width on last odd item */
-    .combo-card.full {
-      grid-column: 1 / -1;
-    }
-
-    /* Responsive */
-    @media (max-width: 500px) {
-      body {
-        padding: 40px 16px 80px;
-      }
-      .color-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 80px;
-      padding-top: 32px;
-      border-top: 1px solid #E8DECA;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: gap;
-      gap: 12px;
-    }
-
-    .footer-brand {
-      font-family: 'Fraunces', serif;
-      font-size: 15px;
-      font-weight: 300;
-      color: #8A7060;
-    }
-
-    .footer-brand span {
-      color: #E80080;
-    }
-
-    .footer-date {
-      font-size: 11px;
-      color: #8A7060;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-  </style>
+  #toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--ink); color:var(--cream); padding:12px 28px; border-radius:100px; font-size:0.85rem; font-weight:700; transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),opacity 0.3s; opacity:0; z-index:999; white-space:nowrap; }
+  #toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+</style>
 </head>
 <body>
-  <div class="wrapper">
 
-    <!-- Header -->
-    <header class="header">
-      <p class="header-eyebrow">Sistema de Diseño</p>
-      <h1>Paleta de colores<br /><em>Exquisiteces by Laura</em></h1>
-      <p class="header-sub">Pastelería saludable artesanal &mdash; Córdoba, Argentina &mdash; Desde 2016</p>
-    </header>
+<header>
+  <div class="brand-name">Exquisiteces <em>by Laura</em></div>
+  <div class="header-sub">Sistema de Color · Guía para Diseño Gráfico · 2026</div>
+</header>
 
-    <!-- GRUPO 1: Identidad -->
-    <section class="group">
-      <div class="group-header">
-        <h2 class="group-title">Grupo 1 &mdash; Identidad</h2>
-        <span class="group-tag">No negociables</span>
+<main>
+
+  <!-- PRIMARIOS -->
+  <div class="section">
+    <div class="section-label">Primarios — los que definen la marca</div>
+    <div class="swatches">
+      <div class="swatch-card" onclick="copy('#E6007E')">
+        <div class="swatch-color" style="background:#E6007E"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fucsia ★</div>
+          <div class="swatch-hex">#E6007E</div>
+          <div class="swatch-vals">RGB 230 · 0 · 126<br>CMYK 0 · 100 · 45 · 10</div>
+          <div class="swatch-use">CTAs, botones, énfasis — el protagonista</div>
+        </div>
       </div>
-      <div class="group-divider"></div>
-      <div class="color-grid">
-
-        <!-- Rosa Exquisiteces -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#E80080;">
-            <span class="label-hex" style="color:#FAF5EC;">#E80080</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Rosa Exquisiteces</div>
-            <div class="color-hex">#E80080</div>
-            <div class="color-desc">La firma</div>
-          </div>
+      <div class="swatch-card" onclick="copy('#A00D5E')">
+        <div class="swatch-color" style="background:#A00D5E"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fucsia Deep</div>
+          <div class="swatch-hex">#A00D5E</div>
+          <div class="swatch-vals">RGB 160 · 13 · 94<br>CMYK 0 · 92 · 41 · 37</div>
+          <div class="swatch-use">Hover, press, sombras de botón</div>
         </div>
-
-        <!-- Rosa Profundo -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#C10069;">
-            <span class="label-hex" style="color:#FAF5EC;">#C10069</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Rosa Profundo</div>
-            <div class="color-hex">#C10069</div>
-            <div class="color-desc">Hover / activo</div>
-          </div>
-        </div>
-
-        <!-- Crema Artesanal -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#F4EDE2; border-bottom: 1px solid #E8DECA;">
-            <span class="label-hex" style="color:#1A0D05;">#F4EDE2</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Crema Artesanal</div>
-            <div class="color-hex">#F4EDE2</div>
-            <div class="color-desc">El alma</div>
-          </div>
-        </div>
-
-        <!-- Espresso Absoluto -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#1A0D05;">
-            <span class="label-hex" style="color:#FAF5EC;">#1A0D05</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Espresso Absoluto</div>
-            <div class="color-hex">#1A0D05</div>
-            <div class="color-desc">El carácter</div>
-          </div>
-        </div>
-
       </div>
-    </section>
-
-    <!-- GRUPO 2: Acento Cálido -->
-    <section class="group">
-      <div class="group-header">
-        <h2 class="group-title">Grupo 2 &mdash; Acento Cálido</h2>
-        <span class="group-tag">Energía y profundidad</span>
+      <div class="swatch-card" onclick="copy('#2A1320')">
+        <div class="swatch-color" style="background:#2A1320"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ink</div>
+          <div class="swatch-hex">#2A1320</div>
+          <div class="swatch-vals">RGB 42 · 19 · 32<br>CMYK 0 · 55 · 24 · 84</div>
+          <div class="swatch-use">Texto principal, logo, fondos oscuros</div>
+        </div>
       </div>
-      <div class="group-divider"></div>
-      <div class="color-grid">
-
-        <!-- Ámbar Canela -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#C86428;">
-            <span class="label-hex" style="color:#FAF5EC;">#C86428</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Ámbar Canela</div>
-            <div class="color-hex">#C86428</div>
-            <div class="color-desc">Miel, caramelo, energía</div>
-          </div>
+      <div class="swatch-card" onclick="copy('#F8F6F7')">
+        <div class="swatch-color" style="background:#F8F6F7; border-bottom:1px solid #F0EAED"><span class="copy-hint" style="color:var(--ink-mute)">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream</div>
+          <div class="swatch-hex">#F8F6F7</div>
+          <div class="swatch-vals">RGB 248 · 246 · 247<br>CMYK 0 · 1 · 0 · 3</div>
+          <div class="swatch-use">Fondo de página — el "papel" de la marca</div>
         </div>
-
-        <!-- Borgoña -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#7A1535;">
-            <span class="label-hex" style="color:#FAF5EC;">#7A1535</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Borgoña</div>
-            <div class="color-hex">#7A1535</div>
-            <div class="color-desc">Profundidad, sofisticación</div>
-          </div>
-        </div>
-
       </div>
-    </section>
-
-    <!-- GRUPO 3: Natural -->
-    <section class="group">
-      <div class="group-header">
-        <h2 class="group-title">Grupo 3 &mdash; Natural</h2>
-        <span class="group-tag">Salud y frescura</span>
-      </div>
-      <div class="group-divider"></div>
-      <div class="color-grid">
-
-        <!-- Salvia -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#4A7850;">
-            <span class="label-hex" style="color:#FAF5EC;">#4A7850</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Salvia</div>
-            <div class="color-hex">#4A7850</div>
-            <div class="color-desc">Salud, frescura, naturaleza</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- GRUPO 4: Neutros -->
-    <section class="group">
-      <div class="group-header">
-        <h2 class="group-title">Grupo 4 &mdash; Neutros de soporte</h2>
-        <span class="group-tag">Fondos y texto</span>
-      </div>
-      <div class="group-divider"></div>
-      <div class="color-grid">
-
-        <!-- Crema Clara -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#FAF5EC; border-bottom: 1px solid #E8DECA;">
-            <span class="label-hex" style="color:#1A0D05;">#FAF5EC</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Crema Clara</div>
-            <div class="color-hex">#FAF5EC</div>
-            <div class="color-desc">Cards, fondos</div>
-          </div>
-        </div>
-
-        <!-- Crema Oscura -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#E8DECA; border-bottom: 1px solid #d5c9b0;">
-            <span class="label-hex" style="color:#1A0D05;">#E8DECA</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Crema Oscura</div>
-            <div class="color-hex">#E8DECA</div>
-            <div class="color-desc">Bordes, variaciones</div>
-          </div>
-        </div>
-
-        <!-- Humo Cálido -->
-        <div class="color-card">
-          <div class="color-swatch swatch-label" style="background:#8A7060;">
-            <span class="label-hex" style="color:#FAF5EC;">#8A7060</span>
-          </div>
-          <div class="color-info">
-            <div class="color-name">Humo Cálido</div>
-            <div class="color-hex">#8A7060</div>
-            <div class="color-desc">Texto secundario</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- APPLICATION SECTION -->
-    <section>
-      <h2 class="section-title">Aplicación</h2>
-      <p class="section-sub">Combinaciones recomendadas para los principales contextos de uso.</p>
-
-      <div class="combos-grid">
-
-        <!-- 1. Hero -->
-        <div class="combo-card">
-          <div class="combo-preview" style="background:#F4EDE2; color:#1A0D05;">
-            <div class="combo-preview-label" style="font-family:'Fraunces',serif;">Exquisiteces<br /><em style="color:#E80080;">by Laura</em></div>
-            <div class="combo-preview-sub">Pastelería saludable artesanal</div>
-            <span class="combo-preview-accent" style="background:#E80080; color:#FAF5EC;">Ver productos</span>
-          </div>
-          <div class="combo-meta">
-            <div class="combo-name">Hero principal</div>
-            <div class="combo-swatches">
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#F4EDE2; border-color:#E8DECA;"></span> Crema Artesanal</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#E80080;"></span> Rosa Exquisiteces</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#1A0D05;"></span> Espresso</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 2. Sección oscura -->
-        <div class="combo-card">
-          <div class="combo-preview" style="background:#1A0D05; color:#FAF5EC;">
-            <div class="combo-preview-label" style="font-family:'Fraunces',serif; color:#FAF5EC;">Sin azúcar.<br />Sin harina.</div>
-            <div class="combo-preview-sub" style="color:#8A7060;">Con todo el sabor.</div>
-            <span class="combo-preview-accent" style="background:#C86428; color:#FAF5EC;">Conocé la línea</span>
-          </div>
-          <div class="combo-meta">
-            <div class="combo-name">Sección oscura</div>
-            <div class="combo-swatches">
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#1A0D05;"></span> Espresso</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#FAF5EC; border-color:#E8DECA;"></span> Crema Clara</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#C86428;"></span> Ámbar Canela</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Sección cálida -->
-        <div class="combo-card">
-          <div class="combo-preview" style="background:#C86428; color:#fff;">
-            <div class="combo-preview-label" style="font-family:'Fraunces',serif; color:#fff;">Miel &amp; dulzor<br />natural.</div>
-            <div class="combo-preview-sub" style="color:rgba(255,255,255,0.65);">Distribuidora B2B Las Quinas</div>
-            <span class="combo-preview-accent" style="background:#FAF5EC; color:#1A0D05;">Ver mieles</span>
-          </div>
-          <div class="combo-meta">
-            <div class="combo-name">Sección cálida</div>
-            <div class="combo-swatches">
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#C86428;"></span> Ámbar Canela</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#F4EDE2; border-color:#E8DECA;"></span> Crema Artesanal</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#ffffff; border-color:#E8DECA;"></span> Blanco</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Badge salud -->
-        <div class="combo-card">
-          <div class="combo-preview" style="background:#FAF5EC; color:#1A0D05; align-items:flex-start;">
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
-              <span style="display:inline-flex; align-items:center; gap:6px; background:#4A7850; color:#FAF5EC; padding:6px 14px; border-radius:999px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L4.5 9L10 3" stroke="#FAF5EC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Sin azúcar
-              </span>
-              <span style="display:inline-flex; align-items:center; gap:6px; background:#4A7850; color:#FAF5EC; padding:6px 14px; border-radius:999px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L4.5 9L10 3" stroke="#FAF5EC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Sin harina
-              </span>
-              <span style="display:inline-flex; align-items:center; gap:6px; background:#4A7850; color:#FAF5EC; padding:6px 14px; border-radius:999px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6.5L4.5 9L10 3" stroke="#FAF5EC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Natural
-              </span>
-            </div>
-            <div style="font-size:12px; color:#8A7060; font-weight:300;">Badges de atributos saludables</div>
-          </div>
-          <div class="combo-meta">
-            <div class="combo-name">Badge salud</div>
-            <div class="combo-swatches">
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#4A7850;"></span> Salvia</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#FAF5EC; border-color:#E8DECA;"></span> Crema Clara</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Hover peligroso (full width) -->
-        <div class="combo-card full">
-          <div class="combo-preview" style="background:#7A1535; color:#FAF5EC;">
-            <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
-              <div>
-                <div class="combo-preview-label" style="font-family:'Fraunces',serif; color:#FAF5EC; font-size:16px;">Estado activo / hover de peligro</div>
-                <div class="combo-preview-sub" style="color:rgba(250,245,236,0.6); margin-top:4px;">Borgoña absorbe la atención. Usarlo solo en momentos de máxima tensión visual.</div>
-              </div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
-                <span style="display:inline-block; background:#FAF5EC; color:#7A1535; padding:7px 18px; border-radius:8px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif;">Botón activo</span>
-                <span style="display:inline-block; background:transparent; color:#FAF5EC; padding:7px 18px; border-radius:8px; font-size:12px; font-weight:500; font-family:'DM Sans',sans-serif; border:1px solid rgba(250,245,236,0.35);">Outline</span>
-              </div>
-            </div>
-          </div>
-          <div class="combo-meta">
-            <div class="combo-name">Hover peligroso</div>
-            <div class="combo-swatches">
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#7A1535;"></span> Borgoña</span>
-              <span class="combo-dot"><span class="combo-dot-circle" style="background:#FAF5EC; border-color:#E8DECA;"></span> Crema Clara</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <span class="footer-brand">Exquisiteces <span>by Laura</span> &mdash; Sistema de Diseño</span>
-      <span class="footer-date">Abril 2026</span>
-    </footer>
-
+    </div>
   </div>
+
+  <!-- SECUNDARIOS -->
+  <div class="section">
+    <div class="section-label">Secundarios — estructura y respiro</div>
+    <div class="swatches">
+      <div class="swatch-card" onclick="copy('#FDFCFC')">
+        <div class="swatch-color" style="background:#FDFCFC; border-bottom:1px solid #F0EAED"><span class="copy-hint" style="color:var(--ink-mute)">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Paper</div>
+          <div class="swatch-hex">#FDFCFC</div>
+          <div class="swatch-vals">RGB 253 · 252 · 252<br>CMYK 0 · 0 · 0 · 1</div>
+          <div class="swatch-use">Fondo de tarjetas sobre Cream</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#F0EAED')">
+        <div class="swatch-color" style="background:#F0EAED"><span class="copy-hint" style="color:var(--ink-mute)">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cream Deep</div>
+          <div class="swatch-hex">#F0EAED</div>
+          <div class="swatch-vals">RGB 240 · 234 · 237<br>CMYK 0 · 3 · 1 · 6</div>
+          <div class="swatch-use">Secciones alternadas, divisores</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#F9DCEC')">
+        <div class="swatch-color" style="background:#F9DCEC"><span class="copy-hint" style="color:var(--ink-mute)">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fucsia Pale</div>
+          <div class="swatch-hex">#F9DCEC</div>
+          <div class="swatch-vals">RGB 249 · 220 · 236<br>CMYK 0 · 12 · 5 · 2</div>
+          <div class="swatch-use">Chips, badges, etiquetas suaves</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#FCF3F8')">
+        <div class="swatch-color" style="background:#FCF3F8; border-bottom:1px solid #F0EAED"><span class="copy-hint" style="color:var(--ink-mute)">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fucsia Wash</div>
+          <div class="swatch-hex">#FCF3F8</div>
+          <div class="swatch-vals">RGB 252 · 243 · 248<br>CMYK 0 · 4 · 2 · 1</div>
+          <div class="swatch-use">Tinte hero, fondos muy sutiles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACENTOS -->
+  <div class="section">
+    <div class="section-label">Acentos — apoyo sin competir con el fucsia</div>
+    <div class="swatches">
+      <div class="swatch-card" onclick="copy('#E0A545')">
+        <div class="swatch-color" style="background:#E0A545"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Miel</div>
+          <div class="swatch-hex">#E0A545</div>
+          <div class="swatch-vals">RGB 224 · 165 · 69<br>CMYK 0 · 26 · 69 · 12</div>
+          <div class="swatch-use">Mieles, mermeladas, calidez, precios</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#558564')">
+        <div class="swatch-color" style="background:#558564"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Verde Hierba</div>
+          <div class="swatch-hex">#558564</div>
+          <div class="swatch-vals">RGB 85 · 133 · 100<br>CMYK 36 · 0 · 25 · 48</div>
+          <div class="swatch-use">Botánica del logo, keto, sin TACC</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#5A3022')">
+        <div class="swatch-color" style="background:#5A3022"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cacao</div>
+          <div class="swatch-hex">#5A3022</div>
+          <div class="swatch-vals">RGB 90 · 48 · 34<br>CMYK 0 · 47 · 62 · 65</div>
+          <div class="swatch-use">Chocolate, fondos tierra, packaging</div>
+        </div>
+      </div>
+      <div class="swatch-card" onclick="copy('#D8C4B0')">
+        <div class="swatch-color" style="background:#D8C4B0"><span class="copy-hint">Click para copiar</span></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Lino</div>
+          <div class="swatch-hex">#D8C4B0</div>
+          <div class="swatch-vals">RGB 216 · 196 · 176<br>CMYK 0 · 9 · 19 · 15</div>
+          <div class="swatch-use">Packaging, props de foto, etiquetas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCALA FUCSIA -->
+  <div class="section">
+    <div class="section-label">Escala fucsia — para gradientes, estados y variaciones</div>
+    <div class="swatches scale">
+      <div class="swatch-card" onclick="copy('#570532')"><div class="swatch-color" style="background:#570532"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">900</div><div class="swatch-hex">#570532</div></div></div>
+      <div class="swatch-card" onclick="copy('#7D0848')"><div class="swatch-color" style="background:#7D0848"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">800</div><div class="swatch-hex">#7D0848</div></div></div>
+      <div class="swatch-card" onclick="copy('#A00D5E')"><div class="swatch-color" style="background:#A00D5E"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">700 hover</div><div class="swatch-hex">#A00D5E</div></div></div>
+      <div class="swatch-card" onclick="copy('#E6007E')" style="box-shadow:0 0 0 3px #E6007E, 0 4px 16px rgba(230,0,126,0.3)"><div class="swatch-color" style="background:#E6007E"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">★ BASE</div><div class="swatch-hex">#E6007E</div></div></div>
+      <div class="swatch-card" onclick="copy('#F42597')"><div class="swatch-color" style="background:#F42597"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">500</div><div class="swatch-hex">#F42597</div></div></div>
+      <div class="swatch-card" onclick="copy('#F25AAD')"><div class="swatch-color" style="background:#F25AAD"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">400</div><div class="swatch-hex">#F25AAD</div></div></div>
+      <div class="swatch-card" onclick="copy('#F288C2')"><div class="swatch-color" style="background:#F288C2"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">300</div><div class="swatch-hex">#F288C2</div></div></div>
+      <div class="swatch-card" onclick="copy('#F5B8D9')"><div class="swatch-color" style="background:#F5B8D9"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">200</div><div class="swatch-hex">#F5B8D9</div></div></div>
+      <div class="swatch-card" onclick="copy('#F9DCEC')"><div class="swatch-color" style="background:#F9DCEC"><span class="copy-hint" style="color:var(--ink-mute)">Copiar</span></div><div class="swatch-info"><div class="swatch-name">100 chips</div><div class="swatch-hex">#F9DCEC</div></div></div>
+      <div class="swatch-card" onclick="copy('#FCF3F8')"><div class="swatch-color" style="background:#FCF3F8; border-bottom:1px solid #F0EAED"><span class="copy-hint" style="color:var(--ink-mute)">Copiar</span></div><div class="swatch-info"><div class="swatch-name">50 lavado</div><div class="swatch-hex">#FCF3F8</div></div></div>
+    </div>
+  </div>
+
+  <!-- TEXTO -->
+  <div class="section">
+    <div class="section-label">Texto — jerarquía tipográfica</div>
+    <div class="swatches text-row">
+      <div class="swatch-card" onclick="copy('#2A1320')"><div class="swatch-color" style="background:#2A1320"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">Ink — principal</div><div class="swatch-hex">#2A1320</div></div></div>
+      <div class="swatch-card" onclick="copy('#48283A')"><div class="swatch-color" style="background:#48283A"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">Ink Soft — secundario</div><div class="swatch-hex">#48283A</div></div></div>
+      <div class="swatch-card" onclick="copy('#7E586D')"><div class="swatch-color" style="background:#7E586D"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">Ink Mute — terciario</div><div class="swatch-hex">#7E586D</div></div></div>
+      <div class="swatch-card" onclick="copy('#AA929F')"><div class="swatch-color" style="background:#AA929F"><span class="copy-hint">Copiar</span></div><div class="swatch-info"><div class="swatch-name">Ink Faint — disabled</div><div class="swatch-hex">#AA929F</div></div></div>
+    </div>
+  </div>
+
+  <!-- COMBINACIONES -->
+  <div class="section">
+    <div class="section-label">Combinaciones recomendadas para tus piezas</div>
+    <div class="combos">
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#F8F6F7">
+          <div class="combo-dot" style="background:#E6007E"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#2A1320; margin-bottom:2px">Instagram feed</div>
+            <div style="font-size:0.75rem; color:#7E586D">Cream · Fucsia · Ink</div>
+          </div>
+        </div>
+        <div class="combo-label">La base. 80% de tus piezas.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#2A1320">
+          <div class="combo-dot" style="background:#E6007E"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#F8F6F7; margin-bottom:2px">Piezas destacadas</div>
+            <div style="font-size:0.75rem; color:#7E586D">Ink · Fucsia · Cream</div>
+          </div>
+        </div>
+        <div class="combo-label">Stories de lanzamiento, banners.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#F8F6F7">
+          <div class="combo-dot" style="background:#E0A545"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#2A1320; margin-bottom:2px">Mieles & mermeladas</div>
+            <div style="font-size:0.75rem; color:#7E586D">Cream · Miel · Ink</div>
+          </div>
+        </div>
+        <div class="combo-label">Línea de productos naturales.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#5A3022">
+          <div class="combo-dot" style="background:#E0A545"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#F8F6F7; margin-bottom:2px">Chocolate & keto</div>
+            <div style="font-size:0.75rem; color:#D8C4B0">Cacao · Miel · Cream</div>
+          </div>
+        </div>
+        <div class="combo-label">Alfajores, budines, tortas.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#FCF3F8">
+          <div class="combo-dot" style="background:#E6007E"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#2A1320; margin-bottom:2px">Kit regalo</div>
+            <div style="font-size:0.75rem; color:#7E586D">Fucsia Wash · Fucsia · Ink</div>
+          </div>
+        </div>
+        <div class="combo-label">Packaging premium, etiquetas.</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-preview" style="background:#F8F6F7">
+          <div class="combo-dot" style="background:#558564"></div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:1rem; font-style:italic; color:#2A1320; margin-bottom:2px">Apto celíaco / keto</div>
+            <div style="font-size:0.75rem; color:#7E586D">Cream · Verde Hierba · Ink</div>
+          </div>
+        </div>
+        <div class="combo-label">Badges, etiquetas de atributos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPOGRAFÍAS -->
+  <div class="section">
+    <div class="section-label">Tipografías del sistema</div>
+    <div class="type-demo">
+      <div class="type-block">
+        <h4>Fraunces — display / titulares</h4>
+        <div class="type-display">El dulce que <em>cuida.</em></div>
+        <div class="type-meta">
+          <strong>Uso:</strong> H1, H2, nombres de producto, frases hero, citas<br>
+          <strong>Pesos:</strong> 300 Light · 400 Regular · 500 Medium<br>
+          <strong>Variación display:</strong> opsz 144 · SOFT 50 · WONK 1<br>
+          <strong>Google Fonts:</strong> gratuita — variable font<br>
+          <strong>⚠ Gourmet Le French:</strong> SOLO para el logo
+        </div>
+      </div>
+      <div class="type-block">
+        <h4>Nunito — cuerpo / UI</h4>
+        <div class="type-body" style="font-size:1.05rem; margin-bottom:14px">Pastelería artesanal hecha a mano. Sin harina, sin azúcar refinada. Para que disfrutar sea un acto de amor propio, no de culpa.</div>
+        <div class="type-meta">
+          <strong>Uso:</strong> Cuerpo, captions de IG, menús, formularios, precios<br>
+          <strong>Pesos:</strong> 300 · 400 · 600 · 700<br>
+          <strong>Por qué Nunito y no DM Sans:</strong> redonda, cálida, artesanal<br>
+          <strong>DM Sans:</strong> demasiado geométrica y "tech" para esta marca
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGLAS -->
+  <div class="rules">
+    <div class="rule">
+      <h5>El protagonista</h5>
+      <p>Un solo elemento ancla en <strong>Fucsia puro</strong> por pieza. El resto rodea sin competir.</p>
+    </div>
+    <div class="rule">
+      <h5>Máx. 3 colores</h5>
+      <p><strong>Cream</strong> de fondo. <strong>Ink</strong> para texto. <strong>Fucsia</strong> o un acento como protagonista.</p>
+    </div>
+    <div class="rule">
+      <h5>Nunca puros</h5>
+      <p>Prohibido <strong>#000000</strong> negro puro y <strong>#FFFFFF</strong> blanco puro. Siempre Ink y Cream del sistema.</p>
+    </div>
+    <div class="rule">
+      <h5>Prohibido combinar</h5>
+      <p>Fucsia sobre Miel ❌<br>Fucsia sobre Verde Hierba ❌<br>Dos acentos juntos sin neutro ❌</p>
+    </div>
+  </div>
+
+</main>
+
+<footer style="padding:40px 24px;">
+  Todos los colores derivan matemáticamente de <strong>#E6007E</strong> — hue 327° · Exquisiteces by Laura · desde 2016
+</footer>
+
+<div id="toast"></div>
+
+<script>
+function copy(hex) {
+  navigator.clipboard.writeText(hex).then(() => {
+    const t = document.getElementById('toast');
+    t.textContent = hex + ' copiado ✓';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+</script>
 </body>
 </html>
