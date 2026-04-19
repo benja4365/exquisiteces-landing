@@ -28,7 +28,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Nunito:ital,wght@0,300..800;1,400&family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Nunito:ital,wght@0,300..800;1,400&family=Sacramento&display=swap" rel="stylesheet">
 
   <!-- JSON-LD: Local Business -->
   <script type="application/ld+json">
@@ -160,7 +160,7 @@
       /* ── TIPOGRAFÍAS ─────────────────────────────────────── */
       --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
       --font-body:    'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-script:  'Caveat', cursive;
+      --font-script:  'Sacramento', cursive;
       --font-logo:    'Gourmet Le French', 'Fraunces', serif;
 
       /* ── ESPACIADO (4pt base) ────────────────────────────── */
@@ -2570,6 +2570,10 @@
       .google-badge-link { flex-direction: column; gap: 8px; text-align: center; border-radius: 20px; }
       .btn-ver-todos { width: 100%; justify-content: center; }
     }
+    .pasos-grid--5 { grid-template-columns: repeat(5, 1fr); }
+    @media (max-width: 900px) { .pasos-grid--5 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .pasos-grid--5 { grid-template-columns: 1fr; } }
+    .combo-badge-note { text-align:center; font-size:0.8rem; font-weight:700; color:var(--fucsia); letter-spacing:0.08em; margin-top:-8px; margin-bottom:8px; }
   </style>
 </head>
 <body class="no-js">
@@ -2624,13 +2628,13 @@
       </p>
 
       <p class="hero-description reveal reveal-delay-3">
-        Pastelería artesanal hecha a mano. Sin harina, sin azúcar refinada, sin conservantes. Apta para dietas keto y diabéticos.
+        Pastelería artesanal hecha a mano. Sin harina, sin azúcar refinada endulzada con stevia, sin conservantes. Apta para dietas keto y diabéticos.
       </p>
 
-      <p class="hero-firma reveal reveal-delay-3">— Laura</p>
+      <p class="hero-firma reveal reveal-delay-3">— Lau</p>
 
       <div class="hero-badges reveal reveal-delay-4">
-        <span class="badge badge-rose">Sin azúcar</span>
+        <span class="badge badge-rose">Sin azúcar refinada</span>
         <span class="badge badge-sage">Apto keto</span>
         <span class="badge badge-cinnamon">Sin conservantes</span>
       </div>
@@ -3045,36 +3049,200 @@
         </div>
       </article>
 
-      <!-- ── LAS QUINAS ── -->
-      <article class="producto-card reveal" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-ddl"><span class="ph-label">foto próximamente</span></div><div class="producto-stamp miel">DDL<br>S/A</div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill miel">Las Quinas</span><span class="producto-pill fucsia">Sin azúcar</span></div>
-          <h3 class="producto-nombre">Dulce de Leche S/A</h3>
-          <p class="producto-tagline">Cremoso, endulzado con stevia. Dist. oficial Las Quinas.</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
+      <!-- LAS QUINAS — DDL -->
+        <article class="producto-card reveal" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span><span class="pill pill-green">Sin azúcar</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Dulce de Leche Sin Azúcar</h3>
+            <p class="producto-tagline">Endulzado con stevia · 400g</p>
+            <p class="producto-desc">El clásico argentino sin azúcar. Ideal para untár, rellenar o comer a cucharadas sin culpa.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-mermelada"><span class="ph-label">foto próximamente</span></div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill miel">Las Quinas</span><span class="producto-pill fucsia">Sin azúcar</span></div>
-          <h3 class="producto-nombre">Mermeladas Artesanales</h3>
-          <p class="producto-tagline">Frutos del bosque, ciruela y damasco. Con miel. Dist. oficial Las Quinas.</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
+        <!-- LAS QUINAS — MIELES -->
+        <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel Orgánica Líquida</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Miel orgánica certificada. Pureza y sabor natural en cada gota.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-budin"><span class="ph-label">foto próximamente</span></div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill miel">Las Quinas</span><span class="producto-pill green">Natural</span></div>
-          <h3 class="producto-nombre">Mieles de Traslasierra</h3>
-          <p class="producto-tagline">Miel pura de Traslasierra, Córdoba. Sin procesar. Dist. oficial Las Quinas.</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
+        <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel Orgánica Cremosa</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Textura sedosa, perfecta para untar. De producción orgánica certificada.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel Premium</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Selección premium de las mejores colmenas. Sabor intenso y aromático.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel Clásica</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">La miel de siempre, con la calidad Las Quinas. Ideal para el día a día.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-3" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel Cruda</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Sin procesar ni calentar. Conserva todas sus propiedades naturales y enzimas activas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel de Limón</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Miel infusionada con limón natural. Refrescante, aromática y llena de vitamina C.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Miel de Eucalipto</h3>
+            <p class="producto-tagline">500g</p>
+            <p class="producto-desc">Con propiedades balsámicas naturales. Un clásico para el bienestar cotidiano.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- LAS QUINAS — MERMELADAS -->
+        <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span><span class="pill pill-green">Sin azúcar</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Mermelada de Durazno</h3>
+            <p class="producto-tagline">Sin azúcar · 400g</p>
+            <p class="producto-desc">De durazno natural, sin azúcar agregada. Ideal para tostadas, yogur o rellenos.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span><span class="pill pill-green">Sin azúcar</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Mermelada de Frutilla</h3>
+            <p class="producto-tagline">Sin azúcar · 400g</p>
+            <p class="producto-desc">Frutilla fresca, sin azúcar agregada. El clásico reinventado para quienes cuidan su alimentación.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-3" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span><span class="pill pill-green">Sin azúcar</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Mermelada de Arándanos</h3>
+            <p class="producto-tagline">Sin azúcar · 400g</p>
+            <p class="producto-desc">Arándanos ricos en antioxidantes. Sin azúcar, con todo el sabor intenso del fruto.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="producto-card reveal reveal-delay-4" data-category="las-quinas">
+          <div class="producto-img-wrap">
+            <div class="producto-img-placeholder"><svg class="placeholder-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="16" width="48" height="36" rx="4"/><circle cx="32" cy="34" r="10"/><circle cx="48" cy="22" r="3"/></svg></div>
+            <div class="producto-pills"><span class="pill pill-miel">Las Quinas</span><span class="pill pill-green">Sin azúcar</span></div>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Mermelada de Moras</h3>
+            <p class="producto-tagline">Sin azúcar · 400g</p>
+            <p class="producto-desc">Moras silvestres, sin azúcar agregada. Un sabor profundo y ligeramente ácido que conquistá.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Consultar</span>
+              <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" class="producto-pedir">Pedir <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            </div>
+          </div>
+        </article>
 
     </div>
 
@@ -3162,21 +3330,31 @@
       </p>
     </div>
 
-    <div class="pasos-grid">
+    <div class="pasos-grid pasos-grid--5">
       <div class="paso reveal">
         <div class="paso-numero">1</div>
-        <h3 class="paso-titulo">Elegí del catálogo</h3>
-        <p class="paso-texto">El catálogo está en WhatsApp. Escribinos y te lo compartimos al toque.</p>
+        <h3 class="paso-titulo">Visualizá el catálogo</h3>
+        <p class="paso-texto">Accedé a nuestro catálogo completo directamente por WhatsApp.</p>
+      </div>
+      <div class="paso reveal reveal-delay-1">
+        <div class="paso-numero">2</div>
+        <h3 class="paso-titulo">Sumá al carrito</h3>
+        <p class="paso-texto">Elegí los productos que querés y armate tu pedido ideal.</p>
       </div>
       <div class="paso reveal reveal-delay-2">
-        <div class="paso-numero">2</div>
-        <h3 class="paso-titulo">Confirmás y pagás</h3>
-        <p class="paso-texto">Te armamos el pedido, te pasamos el total y coordinamos la logística juntas.</p>
+        <div class="paso-numero">3</div>
+        <h3 class="paso-titulo">Confirmás el pedido</h3>
+        <p class="paso-texto">Coordinamos juntos los detalles del pedido por WhatsApp.</p>
+      </div>
+      <div class="paso reveal reveal-delay-3">
+        <div class="paso-numero">4</div>
+        <h3 class="paso-titulo">Realizás el pago</h3>
+        <p class="paso-texto">Transferencia o efectivo. Simple y rápido.</p>
       </div>
       <div class="paso reveal reveal-delay-4">
-        <div class="paso-numero">3</div>
-        <h3 class="paso-titulo">Enviás un repartidor o retirás</h3>
-        <p class="paso-texto">La mayoría de nuestras clientas mandan su propio repartidor. También podés venir a buscar a Córdoba Capital.</p>
+        <div class="paso-numero">5</div>
+        <h3 class="paso-titulo">Coordinamos la entrega</h3>
+        <p class="paso-texto">Enviamos un repartidor o retirás vos en Córdoba Capital.</p>
       </div>
     </div>
 
@@ -3206,7 +3384,7 @@
           </svg>
         </div>
         <h3 class="vp-title">Sin azúcar refinada</h3>
-        <p class="vp-text">Miel, eritritol, dátiles. El dulce que amás sin pico de glucosa.</p>
+        <p class="vp-text">Endulzado con stevia. El dulce que amás sin pico de glucosa.</p>
       </div>
 
       <div class="vp-item reveal reveal-delay-1">
@@ -3229,7 +3407,7 @@
           </svg>
         </div>
         <h3 class="vp-title">Hecho a mano</h3>
-        <p class="vp-text">Cada pieza, en Córdoba, por Laura. Nunca en serie. Se nota.</p>
+        <p class="vp-text">Cada pieza, en Córdoba, por Lau. Nunca en serie. Se nota.</p>
       </div>
 
       <div class="vp-item reveal reveal-delay-3">
@@ -3261,15 +3439,15 @@
     </div>
 
     <div class="kit-text reveal">
-      <p class="kit-eyebrow">Edición limitada</p>
+      <p class="kit-eyebrow">Combos especiales</p>
       <h2 id="kit-title" class="kit-title">El regalo que<br><em>nadie espera.</em><br>Todos quieren.</h2>
-      <p class="kit-desc">Caja de lino con alfajores, budín y miel de Traslasierra. Con nota escrita a mano por Laura. Para diabéticos, amantes del keto y curiosos del buen gusto.</p>
+      <p class="combo-badge-note reveal">✦ Precio especial al combinar productos</p>
+      <p class="kit-desc">Caja de lino con alfajores, budín y miel de Traslasierra. Con nota escrita a mano por Lau. Para diabéticos, amantes del keto y curiosos del buen gusto.</p>
       <div class="kit-tags">
         <span class="kit-tag">Apto keto</span>
         <span class="kit-tag">Apto diabético</span>
-        <span class="kit-tag">Envío a todo Córdoba</span>
       </div>
-      <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="kit-cta">Armá tu kit →</a>
+      <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola!+quiero+armar+un+combo&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="kit-cta">Quiero este combo →</a>
     </div>
 
     <div class="kit-visual reveal reveal-delay-2">
@@ -3308,18 +3486,15 @@
       <div class="laura-content">
         <p class="section-eyebrow reveal" style="justify-content:flex-start;">Sobre mí</p>
         <blockquote class="laura-quote reveal reveal-delay-1">
-          "Empecé porque quería comer rico sin arrepentirme. Hoy lo comparto con toda Córdoba."
+          "Empecé buscando una solución para quienes realmente lo necesitaban. Hoy ese propósito llega a toda Córdoba."
         </blockquote>
         <p class="laura-texto reveal reveal-delay-2">
-          Desde 2016 trabajo en la cocina con una premisa simple: que la pastelería sana
-          sea tan placentera como la tradicional. Sin trucos, sin edulcorantes agresivos,
-          sin ingredientes que no podás pronunciar.
+          Desde 2016 trabajo con una premisa clara: que el dulce no debería ser un problema para nadie. Empecé desarrollando recetas para personas con diabetes, restricciones alimentarias y quienes buscan cuidarse sin renunciar al placer.
         </p>
         <p class="laura-texto reveal reveal-delay-3">
-          Cada receta la desarrollé probando y reprobando hasta que no se notara la diferencia.
-          Porque si tenés que sacrificar el sabor, no vale la pena.
+          Cada producto lo probé hasta que no se notara la diferencia con la pastelería tradicional. Porque si tenés que sacrificar el sabor, no vale la pena.
         </p>
-        <p class="laura-firma reveal reveal-delay-4">— Laura</p>
+        <p class="laura-firma reveal reveal-delay-4">— Lau</p>
       </div>
     </div>
   </section>
@@ -3399,7 +3574,7 @@
 
       <div class="filosofia-quote reveal">
         <blockquote>"Empecé porque quería comer rico sin arrepentirme.<br>Hoy lo comparto con toda Córdoba."</blockquote>
-        <cite>— Laura, fundadora · desde 2016</cite>
+        <cite>— Lau, fundadora · desde 2016</cite>
       </div>
 
     </div>
@@ -3426,7 +3601,7 @@
       <h2 class="section-title reveal reveal-delay-1">Encontranos <em>cerca tuyo</em></h2>
       <p class="section-subtitle reveal reveal-delay-2">
         Nuestros productos están disponibles en dietéticas y almacenes saludables
-        de toda Córdoba. Buscá el más cercano.
+        de toda Córdoba. Buscá el más cercano. Los puntos de venta ofrecen nuestros productos a precio de venta al público.
       </p>
     </div>
 
@@ -3533,7 +3708,7 @@
       <div class="ubicacion-info reveal">
         <p class="section-eyebrow" style="justify-content:flex-start;">Retiro en Córdoba</p>
         <h2 class="section-title" style="text-align:left; font-size:clamp(2rem,3vw,3.2rem);">
-          También podés <em>venir a buscar</em>
+          También podés <em>venir a visitarnos</em>
         </h2>
 
         <div class="horarios-list">
@@ -3595,7 +3770,7 @@
         <div class="ig-handle-wrap">
           <p class="ig-eyebrow">Seguinos en Instagram</p>
           <h2 class="ig-handle-text" id="ig-title">@exquisiteces.lau</h2>
-          <p class="ig-sub">Recetas, detrás de escena y los productos de cada semana.</p>
+          <p class="ig-sub">Fotos y videos de la producción, promociones semanales y los últimos lanzamientos.</p>
         </div>
       </div>
 
@@ -3646,7 +3821,7 @@
       <img src="assets/logo-rectangular-negro-magenta.png" alt="Exquisiteces by Laura" class="footer-logo-img"
         onerror="this.style.display='none'">
       <p class="footer-tagline">Pastelería artesanal sin harina y sin azúcar. Hecha a mano en Córdoba desde 2016.</p>
-      <span class="footer-firma">— Laura</span>
+      <span class="footer-firma">— Lau</span>
     </div>
 
     <!-- Col 2: Productos -->
