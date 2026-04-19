@@ -2308,8 +2308,8 @@
     }
 
     @media (max-width: 768px) {
-      /* ── Mobile nav — pill compacta ── */
-      nav { left: 14px; right: 14px; top: 12px; padding: 8px 8px 8px 16px; }
+      /* ── Mobile nav — SOLO #nav, no afecta footer ── */
+      #nav { left: 14px; right: 14px; top: 12px; padding: 8px 8px 8px 16px; }
       .nav-toggle { display: flex; width: 40px; height: 40px; }
       .nav-links {
         display: none;
@@ -2329,83 +2329,95 @@
       .nav-links li:last-child a { border-bottom: none; }
       .nav-links .nav-cta { background: var(--fucsia) !important; color: var(--cream) !important; text-align: center; padding: 14px 24px !important; border-radius: var(--r-pill) !important; border-bottom: none !important; }
 
-      /* ── Mobile value-props ── */
-      .value-props { padding: 44px 20px; }
-      .value-props-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+      /* ── Mobile hero ── */
+      .hero-text { padding: 88px 20px 52px; }
+      .hero-badges { flex-wrap: wrap; gap: 8px; }
+      .hero-cta-group { flex-direction: column; gap: 12px; margin-top: 28px; }
+      .hero-cta-group a { width: 100%; justify-content: center; text-align: center; }
+
+      /* ── Mobile stats ── */
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 32px 20px; gap: 16px; }
+      .stat-item::after { display: none; }
+      .stat-number { font-size: clamp(2rem, 8vw, 2.5rem); }
+
+      /* ── Mobile productos ── */
+      .productos { padding: 64px 20px; }
+      .productos-grid { grid-template-columns: 1fr; gap: 16px; }
+      .catalog-filters { gap: 6px; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 6px; justify-content: flex-start; }
+      .catalog-filters::-webkit-scrollbar { display: none; }
+      .filter-btn { font-size: 0.72rem; padding: 7px 14px; white-space: nowrap; flex-shrink: 0; }
+
+      /* ── Mobile testimonios ── */
+      .testimonios { padding: 64px 20px; }
+      .testimonios-grid { grid-template-columns: 1fr; gap: 16px; }
+      .google-badge-link { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+      .google-badge-info { flex-wrap: wrap; gap: 6px; }
+      .google-badge-count { flex-basis: 100%; text-align: center; }
+      .google-maps-cta { text-align: center; }
+
+      /* ── Mobile cómo pedir ── */
+      .como-pedir { padding: 64px 20px; }
+      .pasos-grid { grid-template-columns: 1fr; gap: 28px; }
+      .pasos-grid::before { display: none; }
+
+      /* ── Mobile value props ── */
+      .value-props { padding: 52px 20px; }
+      .value-props-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
 
       /* ── Mobile kit ── */
-      .kit-feature { grid-template-columns: 1fr; margin: 0 16px 64px; padding: 52px 28px; gap: 36px; }
+      .kit-feature { grid-template-columns: 1fr; margin: 0 16px 48px; padding: 44px 24px; gap: 28px; border-radius: 24px; }
       .kit-visual { display: none; }
       .kit-title { font-size: clamp(1.8rem, 9vw, 2.6rem); }
 
+      /* ── Mobile sobre laura ── */
+      .sobre-laura { grid-template-columns: 1fr; padding: 64px 20px; gap: 36px; }
+      .laura-content { padding-right: 0; }
+      .laura-foto-wrap { max-width: 300px; margin: 0 auto; }
+
       /* ── Mobile filosofia ── */
-      .filosofia-pillars { grid-template-columns: 1fr 1fr; gap: 14px; }
-      .filosofia-pillar { padding: 20px 18px; }
-
-      /* ── Mobile footer ── */
-      footer { grid-template-columns: 1fr; gap: 28px; padding: 52px 24px 36px; }
-      .footer-col-brand { grid-column: auto; }
-      .footer-copy { flex-direction: column; align-items: flex-start; gap: 10px; }
-
-      /* ── Mobile productos ── */
-      .productos { padding: 72px 20px; }
-      .productos-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-      .catalog-filters { gap: 6px; }
-      .filter-btn { font-size: 0.7rem; padding: 7px 14px; }
-
-      /* ── Mobile sections ── */
-      .productos { padding: 72px 20px; }
-      .productos-grid { grid-template-columns: 1fr; gap: 16px; }
-
-      .filosofia { padding: 72px 20px; }
-      .filosofia-pillars { grid-template-columns: 1fr; gap: 16px; margin-top: 48px; }
+      .filosofia { padding: 64px 20px; }
+      .filosofia-pillars { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
       .filosofia-pillar { padding: 24px 20px; gap: 16px; }
       .filosofia-pillar-icon { width: 40px; height: 40px; }
       .filosofia-quote { padding: 36px 0; }
       .filosofia-quote blockquote { font-size: 1.1rem; }
 
-      .testimonios { padding: 72px 20px; }
-      .testimonios-grid { grid-template-columns: 1fr; }
-      .google-badge-link { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
-      .google-badge-info { flex-wrap: wrap; gap: 6px; }
-      .google-badge-count { flex-basis: 100%; text-align: center; }
-
-      .como-pedir { padding: 72px 20px; }
-      .pasos-grid { grid-template-columns: 1fr; gap: 28px; }
-      .pasos-grid::before { display: none; }
-
-      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 36px 20px; gap: 20px; }
-      .stat-item::after { display: none; }
-      .stat-number { font-size: clamp(2rem, 8vw, 2.5rem); }
-
-      .cta-final { padding: 80px 20px; }
+      /* ── Mobile CTA final ── */
+      .cta-final { padding: 72px 20px; }
       .cta-final-title { font-size: clamp(2.4rem, 11vw, 3.8rem); }
 
-      footer { padding: 48px 20px; gap: 24px; }
-      .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+      /* ── Mobile footer ── */
+      footer { grid-template-columns: 1fr; gap: 24px; padding: 48px 20px 32px; }
+      .footer-col-brand { grid-column: auto; padding-bottom: 20px; border-bottom: 1px solid rgba(244,237,226,0.08); }
+      .footer-copy { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+      .footer-copy-links { justify-content: center; flex-wrap: wrap; }
 
-      .dieteticas { padding: 72px 20px; }
+      /* ── Mobile B2B / ubicación ── */
+      .b2b-callout { padding: 40px 20px; }
+      .b2b-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .dieteticas { padding: 64px 20px; }
       .dieteticas-grid { grid-template-columns: 1fr; }
       .btn-ver-todos { font-size: 0.82rem; padding: 14px 24px; }
+      .ubicacion { padding: 64px 20px; }
+      .ubicacion-inner { grid-template-columns: 1fr; gap: 32px; }
+      .ubicacion-mapa { height: 260px; }
 
-      .ubicacion { padding: 72px 20px; }
-      .ubicacion-inner { grid-template-columns: 1fr; gap: 36px; }
-      .ubicacion-mapa { height: 280px; }
+      /* ── WhatsApp flotante ── */
+      .whatsapp-float { bottom: 20px; right: 16px; }
+      .whatsapp-float a { width: 52px; height: 52px; }
     }
 
-    /* ── Extra small (iPhone SE, etc.) ── */
+    /* ── Extra small (iPhone SE 375px) ── */
     @media (max-width: 390px) {
-      .hero-text { padding: 110px 18px 64px; }
+      .hero-text { padding: 84px 16px 44px; }
       .hero-cta-group { flex-direction: column; gap: 12px; }
       .hero-cta-group a { width: 100%; justify-content: center; }
+      .value-props-inner { grid-template-columns: 1fr; }
       .paso-numero { width: 52px; height: 52px; font-size: 1.2rem; }
       .testimonio-card { padding: 28px 20px; }
       .dietetica-card { padding: 22px 18px; }
       .google-badge-link { flex-direction: column; gap: 8px; text-align: center; border-radius: 20px; }
       .btn-ver-todos { width: 100%; justify-content: center; }
-      .productos-grid { grid-template-columns: 1fr; }
-      .value-props-inner { grid-template-columns: 1fr; }
-      .filosofia-pillars { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -2536,62 +2548,6 @@
       <div class="stat-label">Hecho a mano</div>
     </div>
   </div>
-
-  <!-- VALUE PROPS -->
-  <section class="value-props">
-    <div class="value-props-inner">
-
-      <div class="vp-item reveal">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M12 22C12 14 12 8 12 3"/>
-            <path d="M12 8C9 7 7 5 7 3"/>
-            <path d="M12 13C15 12 17 10 17 7"/>
-            <path d="M12 17C10 16 8 14 8 12"/>
-            <ellipse cx="7" cy="3.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(-25 7 3.5)"/>
-            <ellipse cx="17" cy="7.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(30 17 7.5)"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Sin azúcar refinada</h3>
-        <p class="vp-text">Miel, eritritol, dátiles. El dulce que amás sin pico de glucosa.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-1">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M12 3C8 3 4 6 4 11C4 16 8 20 12 20C16 20 20 16 20 11C20 6 16 3 12 3Z"/>
-            <path d="M9 11L11 13L15 9"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Apto celíaco</h3>
-        <p class="vp-text">Almendra, avena y coco. Sin TACC, sin comprometer el sabor.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-2">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
-            <line x1="16" y1="8" x2="2" y2="22"/>
-            <line x1="17.5" y1="15" x2="9" y2="15"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Hecho a mano</h3>
-        <p class="vp-text">Cada pieza, en Córdoba, por Laura. Nunca en serie. Se nota.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-3">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Ingredientes reales</h3>
-        <p class="vp-text">Lo que lees en la etiqueta es todo lo que hay. Sin letra chica.</p>
-      </div>
-
-    </div>
-  </section>
 
   <!-- PRODUCTOS -->
   <section class="productos" id="productos">
@@ -2729,165 +2685,6 @@
     </div>
   </section>
 
-  <!-- KIT REGALO -->
-  <section class="kit-feature" aria-labelledby="kit-title">
-    <!-- Sprig decorativo de fondo -->
-    <div class="kit-bg-sprig" aria-hidden="true">
-      <svg width="280" height="280" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.15">
-        <path d="M12 22C12 14 12 8 12 3"/>
-        <path d="M12 8C9 7 7 5 7 3"/><path d="M12 13C15 12 17 10 17 7"/>
-        <path d="M12 17C10 16 8 14 8 12"/>
-        <ellipse cx="7" cy="3.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(-25 7 3.5)"/>
-        <ellipse cx="17" cy="7.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(30 17 7.5)"/>
-        <ellipse cx="8" cy="12.5" rx="1.6" ry="0.9" fill="currentColor" transform="rotate(-35 8 12.5)"/>
-      </svg>
-    </div>
-
-    <div class="kit-text reveal">
-      <p class="kit-eyebrow">Edición limitada</p>
-      <h2 id="kit-title" class="kit-title">El regalo que<br><em>nadie espera.</em><br>Todos quieren.</h2>
-      <p class="kit-desc">Caja de lino con alfajores, budín y miel de Traslasierra. Con nota escrita a mano por Laura. Para diabéticos, celíacos y curiosos del buen gusto.</p>
-      <div class="kit-tags">
-        <span class="kit-tag">Apto celíaco</span>
-        <span class="kit-tag">Apto diabético</span>
-        <span class="kit-tag">Envío a todo Córdoba</span>
-      </div>
-      <a href="https://wa.me/5493512345678?text=Hola%20Laura%2C%20quiero%20armar%20un%20kit%20regalo" target="_blank" rel="noopener" class="kit-cta">Armá tu kit →</a>
-    </div>
-
-    <div class="kit-visual reveal reveal-delay-2">
-      <div class="kit-box">
-        <div class="kit-box-inner">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(253,252,252,0.4)" stroke-width="1" stroke-linecap="round">
-            <path d="M12 22C12 14 12 8 12 3"/>
-            <path d="M12 8C9 7 7 5 7 3"/><path d="M12 13C15 12 17 10 17 7"/>
-            <path d="M12 17C10 16 8 14 8 12"/>
-          </svg>
-          <p style="font-family:var(--font-script);font-size:1.1rem;color:rgba(253,252,252,0.5);font-style:italic;margin-top:8px;">foto próximamente</p>
-        </div>
-        <div class="kit-stamp-wrap">
-          <div class="kit-stamp">EDICIÓN<br>LIMITADA</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FILOSOFÍA -->
-  <section class="filosofia" id="filosofia">
-    <div class="filosofia-inner">
-      <div class="filosofia-header section-header">
-        <p class="section-eyebrow reveal">Nuestra filosofía</p>
-        <h2 class="section-title reveal reveal-delay-1">Por qué <em>funciona</em></h2>
-        <p class="section-subtitle reveal reveal-delay-2" style="color:rgba(244,237,226,0.65); max-width:520px; margin:0 auto;">
-          Desde 2016 trabajamos con una sola premisa: que comer sano no sea un sacrificio.
-        </p>
-      </div>
-
-      <div class="filosofia-pillars">
-
-        <div class="filosofia-pillar reveal">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M16 24 Q20 18 24 22 Q28 26 32 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-              <circle cx="24" cy="32" r="4" fill="currentColor" opacity="0.5"/>
-              <path d="M18 36 Q24 40 30 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin azúcar refinada</h3>
-            <p class="filosofia-pillar-texto">Endulzamos con miel pura, dátiles y stevia. El sabor dulce que amás, sin el pico de glucosa que no querés.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-1">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M14 28 C14 20 20 16 24 16 C28 16 34 20 34 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-              <path d="M19 28 L19 34 M24 26 L24 34 M29 28 L29 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin harina de trigo</h3>
-            <p class="filosofia-pillar-texto">Harinas de almendra, avena y coco. Más nutritivas, más digestivas, igual de irresistibles. Aptas para celíacos.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-2">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M24 14 L24 20 M19 16 L22 21 M29 16 L26 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="24" cy="28" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M21 28 L23 30 L27 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin conservantes</h3>
-            <p class="filosofia-pillar-texto">Lo que leés en el ingrediente es lo que hay. 5 días en heladera, 3 meses en freezer. Natural de verdad.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-3">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M24 14 C18 14 14 19 14 24 C14 30 18 34 24 34 C30 34 34 30 34 24 C34 19 30 14 24 14Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
-              <path d="M24 18 L24 24 L28 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Hecho a mano, siempre</h3>
-            <p class="filosofia-pillar-texto">Cada pieza se elabora artesanalmente en Córdoba. Nunca en serie. El sabor se nota en cada mordida.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="filosofia-quote reveal">
-        <blockquote>"Empecé porque quería comer rico sin arrepentirme.<br>Hoy lo comparto con toda Córdoba."</blockquote>
-        <cite>— Laura, fundadora · desde 2016</cite>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SOBRE LAURA -->
-  <section id="sobre-laura">
-    <div class="sobre-laura">
-      <div class="laura-foto-wrap reveal">
-        <div class="laura-foto">
-          <img src="assets/Gemini_Generated_Image_82vcwr82vcwr82vc.png" alt="Laura, fundadora de Exquisiteces by Laura, en su cocina artesanal"
-            loading="lazy" decoding="async"
-            style="width:100%;height:100%;object-fit:cover;object-position:center top;"
-            onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(145deg,#EDE7D5,#D4C9B3)'">
-        </div>
-        <div class="laura-badge">
-          <div class="laura-badge-year">8+</div>
-          <div class="laura-badge-text">años</div>
-        </div>
-      </div>
-
-      <div class="laura-content">
-        <p class="section-eyebrow reveal" style="justify-content:flex-start;">Sobre mí</p>
-        <blockquote class="laura-quote reveal reveal-delay-1">
-          "Empecé porque quería comer rico sin arrepentirme. Hoy lo comparto con toda Córdoba."
-        </blockquote>
-        <p class="laura-texto reveal reveal-delay-2">
-          Desde 2016 trabajo en la cocina con una premisa simple: que la pastelería sana
-          sea tan placentera como la tradicional. Sin trucos, sin edulcorantes agresivos,
-          sin ingredientes que no podás pronunciar.
-        </p>
-        <p class="laura-texto reveal reveal-delay-3">
-          Cada receta la desarrollé probando y reprobando hasta que no se notara la diferencia.
-          Porque si tenés que sacrificar el sabor, no vale la pena.
-        </p>
-        <p class="laura-firma reveal reveal-delay-4">— Laura</p>
-      </div>
-    </div>
-  </section>
-
   <!-- TESTIMONIOS -->
   <section class="testimonios" aria-labelledby="testimonios-title">
     <div class="testimonios-inner">
@@ -2986,6 +2783,221 @@
         <h3 class="paso-titulo">Enviás un repartidor o retirás</h3>
         <p class="paso-texto">La mayoría de nuestras clientas mandan su propio repartidor. También podés venir a buscar a Córdoba Capital.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="value-props">
+    <div class="value-props-inner">
+
+      <div class="vp-item reveal">
+        <div class="vp-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M12 22C12 14 12 8 12 3"/>
+            <path d="M12 8C9 7 7 5 7 3"/>
+            <path d="M12 13C15 12 17 10 17 7"/>
+            <path d="M12 17C10 16 8 14 8 12"/>
+            <ellipse cx="7" cy="3.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(-25 7 3.5)"/>
+            <ellipse cx="17" cy="7.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(30 17 7.5)"/>
+          </svg>
+        </div>
+        <h3 class="vp-title">Sin azúcar refinada</h3>
+        <p class="vp-text">Miel, eritritol, dátiles. El dulce que amás sin pico de glucosa.</p>
+      </div>
+
+      <div class="vp-item reveal reveal-delay-1">
+        <div class="vp-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M12 3C8 3 4 6 4 11C4 16 8 20 12 20C16 20 20 16 20 11C20 6 16 3 12 3Z"/>
+            <path d="M9 11L11 13L15 9"/>
+          </svg>
+        </div>
+        <h3 class="vp-title">Apto celíaco</h3>
+        <p class="vp-text">Almendra, avena y coco. Sin TACC, sin comprometer el sabor.</p>
+      </div>
+
+      <div class="vp-item reveal reveal-delay-2">
+        <div class="vp-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+            <line x1="16" y1="8" x2="2" y2="22"/>
+            <line x1="17.5" y1="15" x2="9" y2="15"/>
+          </svg>
+        </div>
+        <h3 class="vp-title">Hecho a mano</h3>
+        <p class="vp-text">Cada pieza, en Córdoba, por Laura. Nunca en serie. Se nota.</p>
+      </div>
+
+      <div class="vp-item reveal reveal-delay-3">
+        <div class="vp-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3 class="vp-title">Ingredientes reales</h3>
+        <p class="vp-text">Lo que lees en la etiqueta es todo lo que hay. Sin letra chica.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- KIT REGALO -->
+  <section class="kit-feature" aria-labelledby="kit-title">
+    <!-- Sprig decorativo de fondo -->
+    <div class="kit-bg-sprig" aria-hidden="true">
+      <svg width="280" height="280" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.15">
+        <path d="M12 22C12 14 12 8 12 3"/>
+        <path d="M12 8C9 7 7 5 7 3"/><path d="M12 13C15 12 17 10 17 7"/>
+        <path d="M12 17C10 16 8 14 8 12"/>
+        <ellipse cx="7" cy="3.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(-25 7 3.5)"/>
+        <ellipse cx="17" cy="7.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(30 17 7.5)"/>
+        <ellipse cx="8" cy="12.5" rx="1.6" ry="0.9" fill="currentColor" transform="rotate(-35 8 12.5)"/>
+      </svg>
+    </div>
+
+    <div class="kit-text reveal">
+      <p class="kit-eyebrow">Edición limitada</p>
+      <h2 id="kit-title" class="kit-title">El regalo que<br><em>nadie espera.</em><br>Todos quieren.</h2>
+      <p class="kit-desc">Caja de lino con alfajores, budín y miel de Traslasierra. Con nota escrita a mano por Laura. Para diabéticos, celíacos y curiosos del buen gusto.</p>
+      <div class="kit-tags">
+        <span class="kit-tag">Apto celíaco</span>
+        <span class="kit-tag">Apto diabético</span>
+        <span class="kit-tag">Envío a todo Córdoba</span>
+      </div>
+      <a href="https://wa.me/5493512345678?text=Hola%20Laura%2C%20quiero%20armar%20un%20kit%20regalo" target="_blank" rel="noopener" class="kit-cta">Armá tu kit →</a>
+    </div>
+
+    <div class="kit-visual reveal reveal-delay-2">
+      <div class="kit-box">
+        <div class="kit-box-inner">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(253,252,252,0.4)" stroke-width="1" stroke-linecap="round">
+            <path d="M12 22C12 14 12 8 12 3"/>
+            <path d="M12 8C9 7 7 5 7 3"/><path d="M12 13C15 12 17 10 17 7"/>
+            <path d="M12 17C10 16 8 14 8 12"/>
+          </svg>
+          <p style="font-family:var(--font-script);font-size:1.1rem;color:rgba(253,252,252,0.5);font-style:italic;margin-top:8px;">foto próximamente</p>
+        </div>
+        <div class="kit-stamp-wrap">
+          <div class="kit-stamp">EDICIÓN<br>LIMITADA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE LAURA -->
+  <section id="sobre-laura">
+    <div class="sobre-laura">
+      <div class="laura-foto-wrap reveal">
+        <div class="laura-foto">
+          <img src="assets/Gemini_Generated_Image_82vcwr82vcwr82vc.png" alt="Laura, fundadora de Exquisiteces by Laura, en su cocina artesanal"
+            loading="lazy" decoding="async"
+            style="width:100%;height:100%;object-fit:cover;object-position:center top;"
+            onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(145deg,#EDE7D5,#D4C9B3)'">
+        </div>
+        <div class="laura-badge">
+          <div class="laura-badge-year">8+</div>
+          <div class="laura-badge-text">años</div>
+        </div>
+      </div>
+
+      <div class="laura-content">
+        <p class="section-eyebrow reveal" style="justify-content:flex-start;">Sobre mí</p>
+        <blockquote class="laura-quote reveal reveal-delay-1">
+          "Empecé porque quería comer rico sin arrepentirme. Hoy lo comparto con toda Córdoba."
+        </blockquote>
+        <p class="laura-texto reveal reveal-delay-2">
+          Desde 2016 trabajo en la cocina con una premisa simple: que la pastelería sana
+          sea tan placentera como la tradicional. Sin trucos, sin edulcorantes agresivos,
+          sin ingredientes que no podás pronunciar.
+        </p>
+        <p class="laura-texto reveal reveal-delay-3">
+          Cada receta la desarrollé probando y reprobando hasta que no se notara la diferencia.
+          Porque si tenés que sacrificar el sabor, no vale la pena.
+        </p>
+        <p class="laura-firma reveal reveal-delay-4">— Laura</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILOSOFÍA -->
+  <section class="filosofia" id="filosofia">
+    <div class="filosofia-inner">
+      <div class="filosofia-header section-header">
+        <p class="section-eyebrow reveal">Nuestra filosofía</p>
+        <h2 class="section-title reveal reveal-delay-1">Por qué <em>funciona</em></h2>
+        <p class="section-subtitle reveal reveal-delay-2" style="color:rgba(244,237,226,0.65); max-width:520px; margin:0 auto;">
+          Desde 2016 trabajamos con una sola premisa: que comer sano no sea un sacrificio.
+        </p>
+      </div>
+
+      <div class="filosofia-pillars">
+
+        <div class="filosofia-pillar reveal">
+          <div class="filosofia-pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <path d="M16 24 Q20 18 24 22 Q28 26 32 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <circle cx="24" cy="32" r="4" fill="currentColor" opacity="0.5"/>
+              <path d="M18 36 Q24 40 30 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="filosofia-pillar-body">
+            <h3 class="filosofia-pillar-titulo">Sin azúcar refinada</h3>
+            <p class="filosofia-pillar-texto">Endulzamos con miel pura, dátiles y stevia. El sabor dulce que amás, sin el pico de glucosa que no querés.</p>
+          </div>
+        </div>
+
+        <div class="filosofia-pillar reveal reveal-delay-1">
+          <div class="filosofia-pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <path d="M14 28 C14 20 20 16 24 16 C28 16 34 20 34 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M19 28 L19 34 M24 26 L24 34 M29 28 L29 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="filosofia-pillar-body">
+            <h3 class="filosofia-pillar-titulo">Sin harina de trigo</h3>
+            <p class="filosofia-pillar-texto">Harinas de almendra, avena y coco. Más nutritivas, más digestivas, igual de irresistibles. Aptas para celíacos.</p>
+          </div>
+        </div>
+
+        <div class="filosofia-pillar reveal reveal-delay-2">
+          <div class="filosofia-pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <path d="M24 14 L24 20 M19 16 L22 21 M29 16 L26 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="28" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M21 28 L23 30 L27 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="filosofia-pillar-body">
+            <h3 class="filosofia-pillar-titulo">Sin conservantes</h3>
+            <p class="filosofia-pillar-texto">Lo que leés en el ingrediente es lo que hay. 5 días en heladera, 3 meses en freezer. Natural de verdad.</p>
+          </div>
+        </div>
+
+        <div class="filosofia-pillar reveal reveal-delay-3">
+          <div class="filosofia-pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <path d="M24 14 C18 14 14 19 14 24 C14 30 18 34 24 34 C30 34 34 30 34 24 C34 19 30 14 24 14Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <path d="M24 18 L24 24 L28 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="filosofia-pillar-body">
+            <h3 class="filosofia-pillar-titulo">Hecho a mano, siempre</h3>
+            <p class="filosofia-pillar-texto">Cada pieza se elabora artesanalmente en Córdoba. Nunca en serie. El sabor se nota en cada mordida.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="filosofia-quote reveal">
+        <blockquote>"Empecé porque quería comer rico sin arrepentirme.<br>Hoy lo comparto con toda Córdoba."</blockquote>
+        <cite>— Laura, fundadora · desde 2016</cite>
+      </div>
+
     </div>
   </section>
 
@@ -3200,24 +3212,24 @@
     <!-- Col 2: Productos -->
     <div>
       <p class="footer-col-title">Productos</p>
-      <nav class="footer-col-links" aria-label="Productos">
+      <div class="footer-col-links">
         <a href="#productos">Alfajores de almendra</a>
         <a href="#productos">Budines artesanales</a>
         <a href="#productos">Cookies de avena</a>
         <a href="#productos">Mieles de Traslasierra</a>
         <a href="#productos">Kit regalo premium</a>
-      </nav>
+      </div>
     </div>
 
     <!-- Col 3: Info -->
     <div>
       <p class="footer-col-title">Información</p>
-      <nav class="footer-col-links" aria-label="Información">
+      <div class="footer-col-links">
         <a href="#como-pedir">Cómo pedir</a>
         <a href="#dieteticas">Dónde encontrarnos</a>
         <a href="#filosofia">Nuestra historia</a>
         <a href="https://wa.me/5493512345678?text=Hola%20Laura%2C%20quiero%20ser%20punto%20de%20venta" target="_blank" rel="noopener">Para dietéticas →</a>
-      </nav>
+      </div>
     </div>
 
     <!-- Col 4: Redes -->
