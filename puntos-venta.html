@@ -608,7 +608,19 @@
     }
 
     .hero-image-side::before {
-      display: none;
+      content: 'Exquisiteces';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 18vw;
+      font-weight: 300;
+      color: rgba(232,0,128,0.05);
+      letter-spacing: -0.02em;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-15deg);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 1;
     }
 
     .hero-photo {
@@ -617,28 +629,49 @@
       object-fit: cover;
     }
 
-    /* Foto del local — hero side */
-    .hero-photo-wrap {
+    /* Photo placeholder */
+    .hero-photo-placeholder {
       width: 100%;
       height: 100%;
+      background: linear-gradient(160deg, #C8A870 0%, #A07840 30%, #6B4420 65%, #3D2210 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: rgba(244,237,226,0.6);
       position: relative;
       overflow: hidden;
-      background: #2A1810;
     }
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(2px) saturate(1.1) brightness(0.78) contrast(1.05);
-      transform: scale(1.08);
-    }
-    .hero-photo-wrap::after {
+    /* Orbe luminoso central */
+    .hero-photo-placeholder::after {
       content: '';
       position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, rgba(230,0,126,0.18) 0%, rgba(28,16,7,0.42) 60%, rgba(28,16,7,0.65) 100%);
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,168,112,0.4) 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       pointer-events: none;
+    }
+
+    .placeholder-icon {
+      width: 64px;
+      height: 64px;
+      opacity: 0.35;
+      position: relative;
+      z-index: 1;
+    }
+
+    .placeholder-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.5;
+      position: relative;
+      z-index: 1;
     }
 
     /* Hero scroll indicator */
@@ -1060,18 +1093,6 @@
     .producto-stamp.ink { background: var(--ink); transform: rotate(4deg); }
     .producto-stamp.miel { background: var(--miel); color: var(--ink); transform: rotate(-8deg); }
 
-    /* Stamp PNG real (reemplaza SVG div cuando existe asset) */
-    .producto-stamp-img {
-      position: absolute;
-      top: 8px; right: 8px;
-      width: 82px; height: auto;
-      transform: rotate(-10deg);
-      z-index: 3;
-      filter: drop-shadow(0 6px 12px rgba(230,0,126,0.22));
-      animation: stamp-breath 7s ease-in-out infinite;
-      pointer-events: none;
-    }
-
     /* Pills de tags */
     .producto-tags {
       display: flex;
@@ -1160,15 +1181,6 @@
 
     .ph-mermelada { background: linear-gradient(145deg, #2A0812 0%, #7A1535 50%, #C84878 100%); }
     .ph-mermelada::before { background: radial-gradient(circle, #C84878, #2A0812); }
-
-    .ph-salado   { background: linear-gradient(145deg, #3A2814 0%, #8F6B3A 50%, #D8B078 100%); }
-    .ph-salado::before   { background: radial-gradient(circle, #D8B078, #3A2814); }
-
-    .ph-quina    { background: linear-gradient(145deg, #3A0820 0%, #8F1A52 50%, #E6007E 100%); }
-    .ph-quina::before    { background: radial-gradient(circle, #E6007E, #3A0820); }
-
-    .ph-combo    { background: linear-gradient(145deg, #2A1320 0%, #8F4A6B 50%, #F5B8D9 100%); }
-    .ph-combo::before    { background: radial-gradient(circle, #F5B8D9, #2A1320); }
 
     .producto-tag {
       position: absolute;
@@ -2703,105 +2715,11 @@
       transform: translateY(-3px) scale(1.02);
     }
 
-    /* ══════════════════════════════════════════════════════
-       ARTESANAL UPGRADE — texturas, ingredientes flotantes,
-       motion graphics, identidad de marca editorial
-       ══════════════════════════════════════════════════════ */
-
-    /* Hero — fondo limpio, sin texturas externas */
-    .hero {
-      position: relative;
-      background: linear-gradient(135deg, #FAF6F2 0%, #F0EAED 100%);
-    }
-    .hero > * { position: relative; z-index: 1; }
-    @keyframes stamp-breath {
-      0%, 100% { transform: rotate(-8deg) scale(1); }
-      50%      { transform: rotate(-6deg) scale(1.04); }
-    }
-
-    .productos { position: relative; overflow: hidden; }
-    .combos-section { position: relative; overflow: hidden; }
-
-    @keyframes float-slow {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-14px); }
-    }
-
-    .b2b-callout {
-      background: linear-gradient(135deg, var(--fucsia) 0%, #7D0848 100%) !important;
-      position: relative;
-    }
-
-    /* Motion: draw-in sprig en section headers */
-    @keyframes sprig-draw {
-      from { stroke-dashoffset: 200; opacity: 0; }
-      to   { stroke-dashoffset: 0;   opacity: 1; }
-    }
-    .hero-sprig svg path,
-    .hero-sprig svg ellipse {
-      stroke-dasharray: 200;
-      stroke-dashoffset: 200;
-      animation: sprig-draw 1.6s ease-out 0.3s forwards;
-    }
-
-    /* Filter empty-state */
-    .productos-grid[data-empty="true"]::after {
-      content: 'Pronto sumaremos más productos de esta categoría · Consultá por WhatsApp';
-      grid-column: 1 / -1;
-      padding: 80px 24px;
-      text-align: center;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1.2rem;
-      color: var(--ink-mute);
-      background: rgba(255,255,255,0.5);
-      border-radius: var(--r-lg);
-      border: 1px dashed var(--fucsia);
-    }
-
-    /* Hover magnético en producto-card */
-    .producto-card {
-      transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.3s;
-    }
-    .producto-card:hover {
-      transform: translateY(-10px) rotate(-0.4deg);
-      border-color: rgba(230,0,126,0.25);
-    }
-
-    /* Scroll parallax muy sutil en ingredientes */
-    @media (prefers-reduced-motion: no-preference) {
-      body.scrolled .productos::before { transform: translateY(calc(var(--scroll-y, 0) * -0.05px)) rotate(-18deg); }
-    }
-
-    /* Combo-foto placeholder sin border-radius superior duro */
-    .combo-foto .foto-placeholder {
-      border-radius: 0 !important;
-    }
-    .combo-card { transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out); }
-    .combo-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(230,0,126,0.15);
-    }
-
-    /* Espaciados artesanales — mejoras puntuales */
-    .section-header { padding-bottom: 8px; }
-    .section-header .section-title { margin-top: 12px; }
-    .section-header .section-subtitle { margin-top: 16px; max-width: 620px; margin-left: auto; margin-right: auto; }
-
-    /* ═══════════════════════════════════════════════════════════
-       ARTISAN LAYER v3 — assets integrados (v-abril 2026)
-       ═══════════════════════════════════════════════════════════ */
-
-    .combo-illus { display:flex; align-items:center; justify-content:center; background: linear-gradient(145deg, var(--cream) 0%, var(--cream-deep) 100%); }
-    .sprig-divider { display: none; }
-
-    .laura-foto { background: var(--cream); }
-
   </style>
 </head>
 <body class="no-js">
 
-  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+  <a href="index.html#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- NAV -->
   <header>
@@ -2811,11 +2729,11 @@
       <span class="nav-logo-text" style="display:none;">Exquisiteces <em>by Laura</em></span>
     </div>
     <ul class="nav-links" id="nav-menu" role="list">
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="#filosofia">Nuestra historia</a></li>
-      <li><a href="#dieteticas">Dónde encontrarnos</a></li>
-      <li><a href="#como-pedir">Cómo pedir</a></li>
-      <li><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="nav-cta" aria-label="Pedir ahora por WhatsApp">Pedir ahora</a></li>
+      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="index.html#filosofia">Nuestra historia</a></li>
+      <li><a href="index.html#dieteticas">Dónde encontrarnos</a></li>
+      <li><a href="index.html#como-pedir">Cómo pedir</a></li>
+      <li><a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="nav-cta" aria-label="Pedir ahora por WhatsApp">Pedir ahora</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
       <span></span><span></span><span></span>
@@ -2824,914 +2742,559 @@
   </header>
 
   <main id="main-content">
-
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-headline">
-    <div class="hero-text">
-
-      <div class="hero-sprig reveal">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-          <path d="M12 22 C12 14 12 8 12 3"/>
-          <path d="M12 8 C9 7 7 5 7 3"/>
-          <path d="M12 13 C15 12 17 10 17 7"/>
-          <path d="M12 17 C10 16 8 14 8 12"/>
-          <ellipse cx="7" cy="3.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(-25 7 3.5)"/>
-          <ellipse cx="17" cy="7.5" rx="1.8" ry="1" fill="currentColor" transform="rotate(30 17 7.5)"/>
-          <ellipse cx="8" cy="12.5" rx="1.6" ry="0.9" fill="currentColor" transform="rotate(-35 8 12.5)"/>
-        </svg>
-        <span style="font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--verde-hierba);">Córdoba · Desde 2016</span>
-      </div>
-
-      <h1 id="hero-headline" class="hero-headline reveal reveal-delay-1">
-        El dulce<br>que <em>cuida.</em>
-      </h1>
-
-      <p class="hero-subheadline reveal reveal-delay-2">
-        Sin harina. Sin azúcar.<br>Con todo el sabor.
-      </p>
-
-      <p class="hero-description reveal reveal-delay-3">
-        Pastelería artesanal hecha a mano. Sin harina, sin azúcar refinada endulzada con stevia, sin conservantes. Apta para dietas keto y diabéticos.
-      </p>
-
-      <p class="hero-firma reveal reveal-delay-3">— Lau</p>
-
-      <div class="hero-badges reveal reveal-delay-4">
-        <span class="badge badge-rose">Sin azúcar refinada</span>
-        <span class="badge badge-sage">Apto keto</span>
-        <span class="badge badge-cinnamon">Sin conservantes</span>
-      </div>
-
-      <div class="hero-cta-group reveal reveal-delay-4">
-        <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.122 1.528 5.859L.063 23.447a.5.5 0 0 0 .49.617l5.791-1.499A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.655-.516-5.168-1.411l-.368-.219-3.818.988.999-3.714-.241-.373A9.943 9.943 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          Pedir por WhatsApp
-        </a>
-        <a href="https://www.pedidosya.com.ar/restaurantes/cordoba/exquisiteces-lau-pasteleria-saludable-sin-harina-y-sin-azucar-b8acfcb4-9830-4b6e-b191-2067a5a1116a-menu" target="_blank" rel="noopener noreferrer" class="btn-pedidosya" aria-label="Pedir en PedidosYa">
-          <img src="assets/logo-pedidosya.png" alt="" width="20" height="20" loading="lazy" decoding="async" style="object-fit:contain; filter:brightness(0) invert(1);">
-          Pedir en PedidosYa
-        </a>
-        <a href="#productos" class="btn-secondary">Ver productos</a>
-      </div>
-
-      <div class="hero-scroll">
-        <span class="scroll-line"></span>
-        Explorar
-      </div>
-    </div>
-
-    <div class="hero-image-side">
-      <div class="hero-photo-wrap">
-        <img src="assets/fotos/negocio.jpg" alt="Local de Exquisiteces by Laura en Córdoba" loading="eager" decoding="async" fetchpriority="high">
-      </div>
-
-      <!-- Stamp badge removed -->
-
-      <!-- Floater callout -->
-      <div class="hero-floater" aria-hidden="true">
-        <div class="hero-floater-dot">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M12 22C12 14 12 8 12 3"/>
-            <path d="M12 8C9 7 7 5 7 3"/>
-            <path d="M12 13C15 12 17 10 17 7"/>
-          </svg>
-        </div>
-        <div>
-          <strong>Hecho a mano</strong>
-          <span>Pedí hoy por WhatsApp</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item reveal">
-      <div class="stat-number">8<em>+</em></div>
-      <div class="stat-label">Años de experiencia</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-1">
-      <div class="stat-number">0<em>g</em></div>
-      <div class="stat-label">Azúcar refinada</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-2">
-      <div class="stat-number">20<em>+</em></div>
-      <div class="stat-label">Productos artesanales</div>
-    </div>
-    <div class="stat-item reveal reveal-delay-3">
-      <div class="stat-number">100<em>%</em></div>
-      <div class="stat-label">Hecho a mano</div>
-    </div>
-  </div>
-
-  <!-- PRODUCTOS -->
-  
-  <section class="combos-section" id="combos" style="padding: 60px 0; background: var(--cream-deep); overflow: hidden;">
-    <div class="section-header">
-      <p class="section-eyebrow reveal" style="color:var(--fucsia);">Combos especiales</p>
-      <h2 class="section-title reveal reveal-delay-1" style="font-size: clamp(2rem, 4vw, 3rem);">Kits para <em>regalar</em> y compartir</h2>
-    </div>
+  <section class="dieteticas" id="dieteticas" style="padding-top: 100px; padding-bottom: 60px;">
     
-    <div class="combos-carousel reveal reveal-delay-2" style="display: flex; gap: 24px; overflow-x: auto; padding: 20px 64px 40px; scroll-snap-type: x mandatory; scroll-behavior: smooth;">
-      
-      <!-- Combo 1 -->
-      <div class="combo-card" style="flex: 0 0 320px; background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 0 0 24px; scroll-snap-align: start; display:flex; flex-direction:column; overflow:hidden;">
-        <div class="combo-foto combo-illus" style="aspect-ratio: 4/3; width:100%; position:relative; overflow:hidden; background: var(--cream);">
-<div class="foto-placeholder ph-combo" aria-hidden="true"></div>
-        </div>
-        <div style="padding: 24px 24px 0; display:flex; flex-direction:column; flex-grow:1;">
-          <h3 style="font-family: var(--font-body); font-weight:800; font-size:1.2rem; margin-bottom:8px;">Combo Antojo</h3>
-          <p style="font-size:0.85rem; color:var(--ink-mute); margin-bottom:20px; flex-grow:1;">2 Alfajores de almendra + 1 Budín clásico + 1 Cookie. Ideal para sacarte las ganas sin culpa.</p>
-          <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola!+quiero+el+Combo+Antojo" target="_blank" rel="noopener noreferrer" class="kit-cta" style="align-self: flex-start; padding: 10px 20px; font-size:0.8rem; background: var(--fucsia); color: #fff;">Quiero este combo →</a>
-        </div>
-      </div>
-
-      <!-- Combo 2 -->
-      <div class="combo-card" style="flex: 0 0 320px; background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 0 0 24px; scroll-snap-align: start; display:flex; flex-direction:column; overflow:hidden;">
-        <div class="combo-foto combo-illus" style="aspect-ratio: 4/3; width:100%; position:relative; overflow:hidden; background: var(--cream);">
-<div class="foto-placeholder ph-combo" aria-hidden="true"></div>
-        </div>
-        <div style="padding: 24px 24px 0; display:flex; flex-direction:column; flex-grow:1;">
-          <h3 style="font-family: var(--font-body); font-weight:800; font-size:1.2rem; margin-bottom:8px;">Kit Keto Full</h3>
-          <p style="font-size:0.85rem; color:var(--ink-mute); margin-bottom:20px; flex-grow:1;">Mix de productos 100% keto. Perfecto para arrancar la semana enfocado.</p>
-          <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola!+quiero+el+Kit+Keto+Full" target="_blank" rel="noopener noreferrer" class="kit-cta" style="align-self: flex-start; padding: 10px 20px; font-size:0.8rem; background: var(--fucsia); color: #fff;">Quiero este combo →</a>
-        </div>
-      </div>
-
-      <!-- Combo 3 -->
-      <div class="combo-card" style="flex: 0 0 320px; background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 0 0 24px; scroll-snap-align: start; display:flex; flex-direction:column; overflow:hidden;">
-        <div class="combo-foto combo-illus" style="aspect-ratio: 4/3; width:100%; position:relative; overflow:hidden; background: var(--cream);">
-<div class="foto-placeholder ph-combo" aria-hidden="true"></div>
-        </div>
-        <div style="padding: 24px 24px 0; display:flex; flex-direction:column; flex-grow:1;">
-          <h3 style="font-family: var(--font-body); font-weight:800; font-size:1.2rem; margin-bottom:8px;">Combo Familiar</h3>
-          <p style="font-size:0.85rem; color:var(--ink-mute); margin-bottom:20px; flex-grow:1;">Surtido variado para compartir el finde en familia. Incluye DDL sin azúcar.</p>
-          <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola!+quiero+el+Combo+Familiar" target="_blank" rel="noopener noreferrer" class="kit-cta" style="align-self: flex-start; padding: 10px 20px; font-size:0.8rem; background: var(--fucsia); color: #fff;">Quiero este combo →</a>
-        </div>
-      </div>
-
-      <!-- Combo 4 -->
-      <div class="combo-card" style="flex: 0 0 320px; background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 0 0 24px; scroll-snap-align: start; display:flex; flex-direction:column; overflow:hidden;">
-        <div class="combo-foto combo-illus" style="aspect-ratio: 4/3; width:100%; position:relative; overflow:hidden; background: var(--cream);">
-<div class="foto-placeholder ph-combo" aria-hidden="true"></div>
-        </div>
-        <div style="padding: 24px 24px 0; display:flex; flex-direction:column; flex-grow:1;">
-          <h3 style="font-family: var(--font-body); font-weight:800; font-size:1.2rem; margin-bottom:8px;">Caja Degustación</h3>
-          <p style="font-size:0.85rem; color:var(--ink-mute); margin-bottom:20px; flex-grow:1;">Para probar todos los hits de Exquisiteces en tamaño mini.</p>
-          <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola!+quiero+la+Caja+Degustacion" target="_blank" rel="noopener noreferrer" class="kit-cta" style="align-self: flex-start; padding: 10px 20px; font-size:0.8rem; background: var(--fucsia); color: #fff;">Quiero este combo →</a>
-        </div>
-      </div>
-
-      <!-- Combo 5 -->
-      <div class="combo-card" style="flex: 0 0 320px; background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 0 0 24px; scroll-snap-align: start; display:flex; flex-direction:column; overflow:hidden;">
-        <div class="combo-foto combo-illus" style="aspect-ratio: 4/3; width:100%; position:relative; overflow:hidden; background: var(--cream);">
-<div class="foto-placeholder ph-combo" aria-hidden="true"></div>
-        </div>
-        <div style="padding: 24px 24px 0; display:flex; flex-direction:column; flex-grow:1;">
-          <h3 style="font-family: var(--font-body); font-weight:800; font-size:1.2rem; margin-bottom:8px;">Kit Regalo Lino</h3>
-          <p style="font-size:0.85rem; color:var(--ink-mute); margin-bottom:20px; flex-grow:1;">Caja premium con moño, lista para agasajar a alguien especial.</p>
-          <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola!+quiero+el+Kit+Regalo+Lino" target="_blank" rel="noopener noreferrer" class="kit-cta" style="align-self: flex-start; padding: 10px 20px; font-size:0.8rem; background: var(--fucsia); color: #fff;">Quiero este combo →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-<section class="productos" id="productos" style="position:relative;">
     <div class="section-header">
-      <p class="section-eyebrow reveal">Nuestros productos</p>
-      <h2 class="section-title reveal reveal-delay-1">Todo hecho<br><em>con amor</em> y sin culpa</h2>
-      <p class="section-subtitle reveal reveal-delay-2">
-        Sin harina. Sin azúcar refinada. Sin conservantes. Todos aptos keto.<br>
-        
-      </p>
+      <h2 class="section-title reveal">Puntos de <em>Venta</em></h2>
+      <p class="section-subtitle reveal reveal-delay-1">Encontrá nuestros productos en todos estos locales adheridos.</p>
     </div>
-
-    <div class="catalog-filters reveal reveal-delay-2">
-      <button class="filter-btn active" data-filter="todo">Todo</button>
-      <button class="filter-btn" data-filter="dulces">Dulces</button>
-      <button class="filter-btn" data-filter="salados">Salados</button>
-      <button class="filter-btn" data-filter="las-quinas">Las Quinas</button>
-    </div>
-
-    <div class="productos-grid">
-
-      <!-- ── DULCES ── -->
-      <article class="producto-card reveal" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/alfajor-almendras.jpg" alt="Alfajor de Almendra" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"><div class="producto-stamp">MÁS<br>PEDIDO</div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Alfajor de Almendra</h3>
-          <p class="producto-tagline">DDL c/stevia, pasta maní, choc negro 70%. × 2 uds (340g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-1" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/alfajor-almendras.jpg" alt="Alfajor Nevado" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Alfajor Nevado</h3>
-          <p class="producto-tagline">DDL c/stevia, pasta maní, choc blanco s/az y negro 70%. × 1 ud (200g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-2" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/brownie.png" alt="Budín Chocolatoso" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Budín Chocolatoso</h3>
-          <p class="producto-tagline">Almendras, coco, cacao, choc blanco s/az y negro 70%. × 1 ud (480g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/budin-patagonico.jpg" alt="Budín Patagónico" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Budín Patagónico</h3>
-          <p class="producto-tagline">Almendras, frutos rojos, choc rosa. × 1 ud (510g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-1" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/budin-frutos-secos.jpg" alt="Budín de Manzana" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Budín de Manzana</h3>
-          <p class="producto-tagline">Almendras, coco, manzana, canela. × 1 ud (480g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-2" data-category="dulces">
-        <div class="producto-foto"><img src="assets/productos/cookies-almendra.jpg" alt="Cookies de Almendra" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Dulce</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Cookies de Almendra</h3>
-          <p class="producto-tagline">Almendras, coco, choc blanco s/az y negro 70%. × 5 uds (270g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <!-- ── SALADOS ── -->
-      <article class="producto-card reveal" data-category="salados">
-        <div class="producto-foto"><img src="assets/productos/pan-nube.jpg" alt="Pan Nube" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill cinnamon">Salado</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Pan Nube</h3>
-          <p class="producto-tagline">Huevo, leche en polvo descremada, ajo. × 6 uds (150g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-1" data-category="salados">
-        <div class="producto-foto"><img src="assets/productos/pizzetas.jpg" alt="Pizzetas" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill cinnamon">Salado</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Pizzetas</h3>
-          <p class="producto-tagline">Huevo, leche descremada, salsa pizza, orégano, ajo. × 2 uds (160g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-2" data-category="salados">
-        <div class="producto-foto"><img src="assets/productos/palitos.jpg" alt="Palitos de Parmesano" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill cinnamon">Salado</span><span class="producto-pill green">Keto</span></div>
-          <h3 class="producto-nombre">Palitos de Parmesano</h3>
-          <p class="producto-tagline">Harina de almendras, parmesano, albahaca, manteca. × 6 uds (150g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <!-- ── LAS QUINAS ── -->
-      <article class="producto-card reveal" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-quina"><span class="ph-label">foto próximamente</span></div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Las Quinas</span><span class="producto-pill green">Sin azúcar</span></div>
-          <h3 class="producto-nombre">Dulce de Leche c/Stevia</h3>
-          <p class="producto-tagline">Leche entera, stevia, vainilla. Untable artesanal. × 1 frasco (350g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-1" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-quina"><span class="ph-label">foto próximamente</span></div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Las Quinas</span><span class="producto-pill green">Natural</span></div>
-          <h3 class="producto-nombre">Miel Artesanal de Eucalipto</h3>
-          <p class="producto-tagline">100% miel pura de Córdoba, sin pasteurizar. × 1 frasco (500g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      <article class="producto-card reveal reveal-delay-2" data-category="las-quinas">
-        <div class="producto-foto"><div class="foto-placeholder ph-quina"><span class="ph-label">foto próximamente</span></div></div>
-        <div class="producto-body">
-          <div class="producto-tags"><span class="producto-pill fucsia">Las Quinas</span><span class="producto-pill green">Sin azúcar</span></div>
-          <h3 class="producto-nombre">Mermelada de Frutos Rojos</h3>
-          <p class="producto-tagline">Frutilla, arándanos, frambuesa, stevia. × 1 frasco (280g)</p>
-          <div class="producto-footer"><span class="producto-precio">Consultar</span><a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="producto-pedir">Pedir →</a></div>
-        </div>
-      </article>
-
-      </div>
-    <div class="reveal reveal-delay-2" style="text-align: center; margin-top: 48px;">
-      <a href="productos.html" class="btn-outline-rose" style="display:inline-flex; align-items:center; gap:10px; font-weight:bold; padding: 16px 32px; font-size:1rem; border-radius:50px;">
-        Ver el catálogo completo →
-      </a>
-    </div></section>
-
-
-  <!-- TESTIMONIOS -->
-  <section class="testimonios" aria-labelledby="testimonios-title">
-    <div class="testimonios-inner">
-      <div class="section-header">
-        <p class="section-eyebrow reveal">Lo que dicen</p>
-        <h2 id="testimonios-title" class="section-title reveal reveal-delay-1">Ellas lo <em>prueban,</em><br>vos decidís</h2>
-      </div>
-      <!-- Google rating badge -->
-      <div class="google-badge reveal reveal-delay-1">
-        <a href="https://maps.app.goo.gl/D1FGTF6c6v5LjAbv8" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="google-badge-link" aria-label="Ver opiniones en Google Maps">
-          <svg class="google-badge-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          <div class="google-badge-info">
-            <span class="google-badge-stars" aria-label="4.7 de 5 estrellas">★★★★★</span>
-            <span class="google-badge-score">4,7</span>
-            <span class="google-badge-count">142 reseñas en Google</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="testimonios-grid">
-
-        <blockquote class="testimonio-card reveal">
-          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-          <p class="testimonio-texto">"La verdad que muy bueno todo, lo pedí para probar y quedé encantada. Los alfajores están riquísimos y todo muy rico."</p>
-          <footer class="testimonio-autor">
-            <div class="testimonio-avatar" aria-hidden="true">FG</div>
-            <div>
-              <strong>Flor Guerrero</strong>
-              <span>Reseña en Google Maps</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonio-card reveal reveal-delay-1">
-          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-          <p class="testimonio-texto">"Excelentes productos, ricos y saludables. Buena atención y entrega rápida. Los recomiendo totalmente."</p>
-          <footer class="testimonio-autor">
-            <div class="testimonio-avatar" aria-hidden="true">LL</div>
-            <div>
-              <strong>Lucía Lescano</strong>
-              <span>Reseña en Google Maps</span>
-            </div>
-          </footer>
-        </blockquote>
-
-        <blockquote class="testimonio-card reveal reveal-delay-2">
-          <div class="testimonio-stars" aria-label="5 estrellas">★★★★★</div>
-          <p class="testimonio-texto">"Muy buen producto, muy rica la torta de chocolate, super esponjosa. Buena atención al cliente y puntual la entrega."</p>
-          <footer class="testimonio-autor">
-            <div class="testimonio-avatar" aria-hidden="true">AR</div>
-            <div>
-              <strong>Alejandra Del Valle Ríos</strong>
-              <span>Reseña en Google Maps</span>
-            </div>
-          </footer>
-        </blockquote>
-
-      </div>
-
-      <div class="google-maps-cta reveal">
-        <a href="https://maps.app.goo.gl/D1FGTF6c6v5LjAbv8" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="btn-outline-cream">
-          Ver todas las reseñas en Google →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CÓMO PEDIR -->
-  <section class="como-pedir" id="como-pedir">
-    <div class="section-header">
-      <p class="section-eyebrow reveal">Simple y rápido</p>
-      <h2 class="section-title reveal reveal-delay-1">¿Cómo <em>pedir?</em></h2>
-      <p class="section-subtitle reveal reveal-delay-2">
-        Todo por WhatsApp. Sin formularios complicados.
-      </p>
-    </div>
-
-    <div class="pasos-grid pasos-grid--5">
-      <div class="paso reveal">
-        <div class="paso-numero">1</div>
-        <h3 class="paso-titulo">Visualizá el catálogo</h3>
-        <p class="paso-texto">Accedé a nuestro catálogo completo directamente por WhatsApp.</p>
-      </div>
-      <div class="paso reveal reveal-delay-1">
-        <div class="paso-numero">2</div>
-        <h3 class="paso-titulo">Sumá al carrito</h3>
-        <p class="paso-texto">Elegí los productos que querés y armate tu pedido ideal.</p>
-      </div>
-      
-      <div class="paso reveal reveal-delay-3">
-        <div class="paso-numero">3</div>
-        <h3 class="paso-titulo">Realizás el pago</h3>
-        <p class="paso-texto">Abonás mediante transferencia bancaria. Simple y rápido.</p>
-      </div>
-      <div class="paso reveal reveal-delay-4">
-        <div class="paso-numero">4</div>
-        <h3 class="paso-titulo">Coordinamos la entrega</h3>
-        <p class="paso-texto">Enviás tu repartidor de confianza o pasás a retirar por nuestro taller.</p>
-      </div>
-    </div>
-
-    
-    <div class="pedidosya-callout reveal" style="text-align:center; margin-top:40px;">
-      <a href="https://www.pedidosya.com.ar/restaurantes/cordoba/exquisiteces-lau-pasteleria-saludable-sin-harina-y-sin-azucar-b8acfcb4-9830-4b6e-b191-2067a5a1116a-menu" target="_blank" rel="noopener noreferrer"
-         style="display:inline-flex; align-items:center; gap:12px; background:#FA0050; color:#fff; padding:14px 28px; border-radius:50px; font-weight:700; font-size:1.1rem; text-decoration:none; box-shadow: 0 4px 15px rgba(250,0,80,0.3); transition: transform .3s ease;"
-         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-        <img src="assets/logo-pedidosya.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="object-fit:contain; filter:brightness(0) invert(1);">
-        Pedí por PedidosYa
-      </a>
-    </div>
-  </section>
-<section class="ig-section" id="instagram" aria-labelledby="ig-title">
-    <div class="ig-section-inner">
-
-      <div class="ig-header reveal">
-        <div class="ig-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </div>
-        <div class="ig-handle-wrap">
-          <p class="ig-eyebrow">Seguinos en Instagram</p>
-          <h2 class="ig-handle-text" id="ig-title">@exquisiteces.lau</h2>
-          <p class="ig-sub">Fotos y videos de la producción, promociones semanales y los últimos lanzamientos.</p>
-        </div>
-      </div>
-
-      <!-- Grid de posts placeholder -->
-      <div class="ig-grid" aria-hidden="true">
-        <div class="ig-post ig-post--1 reveal"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-        <div class="ig-post ig-post--2 reveal reveal-delay-1"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-        <div class="ig-post ig-post--3 reveal reveal-delay-2"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-        <div class="ig-post ig-post--4 reveal reveal-delay-1"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-        <div class="ig-post ig-post--5 reveal reveal-delay-2"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-        <div class="ig-post ig-post--6 reveal reveal-delay-3"><div class="ig-post-overlay"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div>
-      </div>
-
-      <div class="ig-cta-wrap reveal">
-        <a href="https://www.instagram.com/exquisiteces.lau/" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="btn-ig-follow">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Seguir en Instagram
-        </a>
-        <p class="ig-cta-note">Nuevas fotos cada semana · @exquisiteces.lau</p>
-      </div>
-
-    </div>
-  </section>
-<!-- VALUE PROPS -->
-  <section class="value-props">
-    <div class="value-props-inner">
-
-      <div class="vp-item reveal">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M12 22C12 14 12 8 12 3"/>
-            <path d="M12 8C9 7 7 5 7 3"/>
-            <path d="M12 13C15 12 17 10 17 7"/>
-            <path d="M12 17C10 16 8 14 8 12"/>
-            <ellipse cx="7" cy="3.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(-25 7 3.5)"/>
-            <ellipse cx="17" cy="7.5" rx="1.7" ry="0.9" fill="currentColor" transform="rotate(30 17 7.5)"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Sin azúcar refinada</h3>
-        <p class="vp-text">Endulzado con stevia. El dulce que amás sin pico de glucosa.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-1">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M12 3C8 3 4 6 4 11C4 16 8 20 12 20C16 20 20 16 20 11C20 6 16 3 12 3Z"/>
-            <path d="M9 11L11 13L15 9"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Apto para dieta keto</h3>
-        <p class="vp-text">Almendra, coco y frutos secos. Bajo en carbohidratos, alto en sabor.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-2">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
-            <line x1="16" y1="8" x2="2" y2="22"/>
-            <line x1="17.5" y1="15" x2="9" y2="15"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Hecho a mano</h3>
-        <p class="vp-text">Cada pieza, en Córdoba, por Lau. Nunca en serie. Se nota.</p>
-      </div>
-
-      <div class="vp-item reveal reveal-delay-3">
-        <div class="vp-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <h3 class="vp-title">Ingredientes reales</h3>
-        <p class="vp-text">Lo que lees en la etiqueta es todo lo que hay. Sin letra chica.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- KIT REGALO -->
-  
-
-
-  <!-- SOBRE LAURA -->
-  <section id="sobre-laura">
-    <div class="sobre-laura">
-      <div class="laura-foto-wrap reveal">
-        <div class="laura-foto">
-          <img src="assets/fotos/laura.png" alt="Laura, fundadora de Exquisiteces by Laura"
-            loading="lazy" decoding="async"
-            style="width:100%;height:100%;object-fit:cover;object-position:center;">
-        </div>
-        <div class="laura-badge">
-          <div class="laura-badge-year">8+</div>
-          <div class="laura-badge-text">años</div>
-        </div>
-      </div>
-
-      <div class="laura-content">
-        <p class="section-eyebrow reveal" style="justify-content:flex-start;">Sobre mí</p>
-        <blockquote class="laura-quote reveal reveal-delay-1">
-          "Empecé buscando una solución para quienes realmente lo necesitaban. Hoy ese propósito llega a toda Córdoba."
-        </blockquote>
-        <p class="laura-texto reveal reveal-delay-2">
-          Desde 2016 trabajo con una premisa clara: que el dulce no debería ser un problema para nadie. Empecé desarrollando recetas para personas con diabetes, restricciones alimentarias y quienes buscan cuidarse sin renunciar al placer.
-        </p>
-        <p class="laura-texto reveal reveal-delay-3">
-          Cada producto lo probé hasta que no se notara la diferencia con la pastelería tradicional. Porque si tenés que sacrificar el sabor, no vale la pena.
-        </p>
-        <p class="laura-firma reveal reveal-delay-4">— Lau</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FILOSOFÍA -->
-  <section class="filosofia" id="filosofia">
-    <div class="filosofia-inner">
-      <div class="filosofia-header section-header">
-        <p class="section-eyebrow reveal">Nuestra filosofía</p>
-        <h2 class="section-title reveal reveal-delay-1">Por qué <em>funciona</em></h2>
-        <p class="section-subtitle reveal reveal-delay-2" style="color:rgba(244,237,226,0.65); max-width:520px; margin:0 auto;">
-          Desde 2016 trabajamos con una sola premisa: que comer sano no sea un sacrificio.
-        </p>
-      </div>
-
-      <div class="filosofia-pillars">
-
-        <div class="filosofia-pillar reveal">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M16 24 Q20 18 24 22 Q28 26 32 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-              <circle cx="24" cy="32" r="4" fill="currentColor" opacity="0.5"/>
-              <path d="M18 36 Q24 40 30 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin azúcar refinada</h3>
-            <p class="filosofia-pillar-texto">Endulzamos con miel pura, dátiles y stevia. El sabor dulce que amás, sin el pico de glucosa que no querés.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-1">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M14 28 C14 20 20 16 24 16 C28 16 34 20 34 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-              <path d="M19 28 L19 34 M24 26 L24 34 M29 28 L29 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin harina de trigo</h3>
-            <p class="filosofia-pillar-texto">Harinas de almendra, avena y coco. Más nutritivas, más digestivas, igual de irresistibles. Aptas para dietas keto.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-2">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M24 14 L24 20 M19 16 L22 21 M29 16 L26 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="24" cy="28" r="6" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M21 28 L23 30 L27 26" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Sin conservantes</h3>
-            <p class="filosofia-pillar-texto">Lo que leés en el ingrediente es lo que hay. 5 días en heladera, 3 meses en freezer. Natural de verdad.</p>
-          </div>
-        </div>
-
-        <div class="filosofia-pillar reveal reveal-delay-3">
-          <div class="filosofia-pillar-icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-              <path d="M24 14 C18 14 14 19 14 24 C14 30 18 34 24 34 C30 34 34 30 34 24 C34 19 30 14 24 14Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
-              <path d="M24 18 L24 24 L28 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="filosofia-pillar-body">
-            <h3 class="filosofia-pillar-titulo">Hecho a mano, siempre</h3>
-            <p class="filosofia-pillar-texto">Cada pieza se elabora artesanalmente en Córdoba. Nunca en serie. El sabor se nota en cada mordida.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="filosofia-quote reveal">
-        <blockquote>"Empecé porque quería comer rico sin arrepentirme.<br>Hoy lo comparto con toda Córdoba."</blockquote>
-        <cite>— Lau, fundadora · desde 2016</cite>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- B2B CALLOUT -->
-  <div class="b2b-callout" role="complementary" aria-label="Información para negocios" style="position:relative; overflow:hidden;">
-    <div class="b2b-inner">
-      <div class="b2b-text">
-        <p class="b2b-eyebrow">Para negocios</p>
-        <h3 class="b2b-title">¿Tenés una dietética o almacén saludable?</h3>
-        <p class="b2b-desc">Sumate a los puntos de venta que ya confían en Exquisiteces. Precios mayoristas, productos que se venden solos.</p>
-      </div>
-      <a href="https://api.whatsapp.com/send?phone=+5493517592984&text=Hola%21+tengo+un+negocio+y+estoy+interesado+en+la+venta+mayorista+de+tus+productos%2C+me+pasar%C3%ADas+info" target="_blank" rel="noopener noreferrer" class="b2b-cta" aria-label="Consultar condiciones mayoristas por WhatsApp">
-        Quiero ser punto de venta →
-      </a>
-    </div>
-  </div>
-
-  <!-- ENCONTRANOS EN -->
-  <section class="dieteticas" id="dieteticas">
-    <div class="section-header">
-      <p class="section-eyebrow reveal">Puntos de venta</p>
-      <h2 class="section-title reveal reveal-delay-1">Encontranos <em>cerca tuyo</em></h2>
-      <p class="section-subtitle reveal reveal-delay-2">
-        Nuestros productos están disponibles en dietéticas y almacenes saludables
-        de toda Córdoba. Buscá el más cercano. Los puntos de venta ofrecen nuestros productos a precio de venta al público.
-      </p>
-    </div>
-
     <div class="dieteticas-grid">
+
       <div class="dietetica-card reveal">
-        <div class="dietetica-zona">Zona / Ciudad</div>
-        <h3 class="dietetica-nombre">Nombre del Local B2B</h3>
-        <p class="dietetica-dir">Dirección Física</p>
+        <div class="dietetica-zona">(Múltiples sucursales)</div>
+        <h3 class="dietetica-nombre">Orígenes Almacén</h3>
+        <p class="dietetica-dir">B° Liceo / Nueva Córdoba / Gral Paz (Rondeau 620)</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Nombre%20del%20Local%20B2B%20Direcci%C3%B3n%20F%C3%ADsica%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Origenes%20Almacen%20Cordoba" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/origenes.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@origenes.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Córdoba Capital / La Carlota</div>
+        <h3 class="dietetica-nombre">Verde Almacén ( manantiales)</h3>
+        <p class="dietetica-dir">Paraná 580 / Independencia 620 / Jorge Ross 241 (La Carlota)</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Verde%20Almac%C3%A9n%20(%20manantiales)%20Paran%C3%A1%20580%20%2F%20Independencia%20620%20%2F%20Jorge%20Ross%20241%20(La%20Carlota)%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/verde.almacen.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@verde.almacen.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">(7 Locales en Capital)</div>
+        <h3 class="dietetica-nombre">Entresano</h3>
+        <p class="dietetica-dir">Colón 376 / 24 de Sept. 705 / San Juan 85 / Estrada 36 / Illia 274 / Martinolli 7986</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Entresano%20Cordoba" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/entresano.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@entresano.cba</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-1">
         <div class="dietetica-zona">Córdoba Capital</div>
-        <h3 class="dietetica-nombre">9 De Julio</h3>
-        <p class="dietetica-dir">9 De Julio 566 PB</p>
+        <h3 class="dietetica-nombre">Girasol</h3>
+        <p class="dietetica-dir">Arturo M. Bas 26 / 36</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=9%20De%20Julio%209%20De%20Julio%20566%20PB%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Girasol%20Arturo%20M.%20Bas%2026%20%2F%2036%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/girasol.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@girasol.cba</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-2">
-        <div class="dietetica-zona">Traslasierra (Villa Dolores)</div>
-        <h3 class="dietetica-nombre">A Granel Almacén Natural</h3>
-        <p class="dietetica-dir">Anastacia F. de Merlo</p>
+        <div class="dietetica-zona">Centro</div>
+        <h3 class="dietetica-nombre">Espacio light</h3>
+        <p class="dietetica-dir">Belgrano 183</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=A%20Granel%20Almac%C3%A9n%20Natural%20Anastacia%20F.%20de%20Merlo%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Espacio%20light%20Belgrano%20183%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/espacio.light" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@espacio.light</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-3">
-        <div class="dietetica-zona">A confirmar</div>
-        <h3 class="dietetica-nombre">Abaruc Almacén Saludable</h3>
-        <p class="dietetica-dir">DirecciÃ³n no disponible</p>
+        <div class="dietetica-zona">Córdoba Capital / La Carlota</div>
+        <h3 class="dietetica-nombre">Quiero verde</h3>
+        <p class="dietetica-dir">Paraná 580 / Independencia 620 / Jorge Ross 241 (La Carlota)</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Abaruc%20Almac%C3%A9n%20Saludable%20%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Quiero%20verde%20Paran%C3%A1%20580%20%2F%20Independencia%20620%20%2F%20Jorge%20Ross%20241%20(La%20Carlota)%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-          <a href="https://instagram.com/abaruc.almacen.saludable" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@abaruc.almacen.saludable</a>
+          <a href="https://instagram.com/quiero.verde.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@quiero.verde.cba</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-4">
         <div class="dietetica-zona">Córdoba Capital</div>
-        <h3 class="dietetica-nombre">Abeja Reina</h3>
-        <p class="dietetica-dir">Felix Frías 190</p>
+        <h3 class="dietetica-nombre">Boreal</h3>
+        <p class="dietetica-dir">Urquiza 54</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Abeja%20Reina%20Felix%20Fr%C3%ADas%20190%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Boreal%20Urquiza%2054%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/borealmercado" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@borealmercado</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-5">
-        <div class="dietetica-zona">Córdoba Capital</div>
-        <h3 class="dietetica-nombre">Adelina Almacén Natural</h3>
-        <p class="dietetica-dir">DirecciÃ³n no disponible</p>
+        <div class="dietetica-zona">Zona Docta</div>
+        <h3 class="dietetica-nombre">Natural market</h3>
+        <p class="dietetica-dir">Córdoba</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Adelina%20Almac%C3%A9n%20Natural%20%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Natural%20market%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-          <a href="https://instagram.com/adelinaalmacen" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@adelinaalmacen</a>
+          <a href="https://instagram.com/naturalmarket.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@naturalmarket.cba</a>
         </div>
       </div>
       <div class="dietetica-card reveal">
-        <div class="dietetica-zona">Córdoba Capital</div>
-        <h3 class="dietetica-nombre">Ajonjolí SAS</h3>
-        <p class="dietetica-dir">Juan de Garay 2107</p>
+        <div class="dietetica-zona">Alto Alberdi</div>
+        <h3 class="dietetica-nombre">Almazen</h3>
+        <p class="dietetica-dir">Pedro Goyena 252</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Ajonjol%C3%AD%20SAS%20Juan%20de%20Garay%202107%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Almazen%20Pedro%20Goyena%20252%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/distri_may" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@distri_may</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-1">
         <div class="dietetica-zona">Córdoba Capital</div>
-        <h3 class="dietetica-nombre">Alem</h3>
-        <p class="dietetica-dir">Av. Leandro N. Alem 2082</p>
+        <h3 class="dietetica-nombre">Mixturas</h3>
+        <p class="dietetica-dir">Córdoba</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Alem%20Av.%20Leandro%20N.%20Alem%202082%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Mixturas%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/mixturas.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@mixturas.cba</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-2">
-        <div class="dietetica-zona">Villa Allende</div>
-        <h3 class="dietetica-nombre">Almacén Carda y Momo</h3>
-        <p class="dietetica-dir">DirecciÃ³n no disponible</p>
+        <div class="dietetica-zona">Zona Norte</div>
+        <h3 class="dietetica-nombre">Veo verde</h3>
+        <p class="dietetica-dir">Av. Rafael Núñez 5440</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Almac%C3%A9n%20Carda%20y%20Momo%20%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Veo%20verde%20Av.%20Rafael%20N%C3%BA%C3%B1ez%205440%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-          <a href="https://instagram.com/almacencardaymomo_" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@almacencardaymomo_</a>
+          <a href="https://instagram.com/veoverde.dietetica" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@veoverde.dietetica</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-3">
+        <div class="dietetica-zona">Zona Norte</div>
+        <h3 class="dietetica-nombre">Almendra</h3>
+        <p class="dietetica-dir">Recta Martinolli 8212 (Loc. 12 y 14)</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Almendra%20Recta%20Martinolli%208212%20(Loc.%2012%20y%2014)%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/dietetica.almendraok" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@dietetica.almendraok</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-4">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Canela y miel</h3>
+        <p class="dietetica-dir">Los Álamos 529</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Canela%20y%20miel%20Los%20%C3%81lamos%20529%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/canelaymiel_almacenatural" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@canelaymiel_almacenatural</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-5">
+        <div class="dietetica-zona">General Paz</div>
+        <h3 class="dietetica-nombre">Cardamomo</h3>
+        <p class="dietetica-dir">Río de Janeiro 1025</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Cardamomo%20R%C3%ADo%20de%20Janeiro%201025%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/almacencardaymomo" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@almacencardaymomo</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Eneldo</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Eneldo%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/eneldo.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@eneldo.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-1">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Enldo ( centro)</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Enldo%20(%20centro)%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/enldo.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@enldo.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Alma terra</h3>
+        <p class="dietetica-dir">Luis Agote 2667</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Alma%20terra%20Luis%20Agote%202667%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/alma.terra.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@alma.terra.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-3">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">El ruso</h3>
+        <p class="dietetica-dir">Colón 111</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=El%20ruso%20Col%C3%B3n%20111%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/el.ruso.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@el.ruso.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-4">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Anís</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=An%C3%ADs%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/anis.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@anis.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-5">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Vitalica</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Vitalica%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/vitalica.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@vitalica.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">(Múltiples sucursales)</div>
+        <h3 class="dietetica-nombre">Grandiet alta Córdoba</h3>
+        <p class="dietetica-dir">Núñez 4086 / Carrefour Colón / Chango Más Colón / Paseo Lugones / 27 de Abril 77 / Paseo Libertad / Jacinto Ríos 765 / Rivera Indarte / Colonia Caroya (Mariano Max)</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Grandiet%20alta%20C%C3%B3rdoba%20N%C3%BA%C3%B1ez%204086%20%2F%20Carrefour%20Col%C3%B3n%20%2F%20Chango%20M%C3%A1s%20Col%C3%B3n%20%2F%20Paseo%20Lugones%20%2F%2027%20de%20Abril%2077%20%2F%20Paseo%20Libertad%20%2F%20Jacinto%20R%C3%ADos%20765%20%2F%20Rivera%20Indarte%20%2F%20Colonia%20Caroya%20(Mariano%20Max)%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/grandiet.alta.cordoba.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@grandiet.alta.cordoba.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-1">
+        <div class="dietetica-zona">Zona Sur</div>
+        <h3 class="dietetica-nombre">Tesai manantiales</h3>
+        <p class="dietetica-dir">O’Higgins 5870 / Av. Donosa 3900</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Tesai%20manantiales%20O%E2%80%99Higgins%205870%20%2F%20Av.%20Donosa%203900%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/tesai.manantiales.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@tesai.manantiales.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Zona Sur</div>
+        <h3 class="dietetica-nombre">Tesai O'Higgins</h3>
+        <p class="dietetica-dir">O’Higgins 5870 / Av. Donosa 3900</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Tesai%20O'Higgins%20O%E2%80%99Higgins%205870%20%2F%20Av.%20Donosa%203900%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/tesai.o'higgins.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@tesai.o'higgins.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-3">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Piú sano</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pi%C3%BA%20sano%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/piusanonatural" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@piusanonatural</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-4">
+        <div class="dietetica-zona">Córdoba Capital / Carlos Paz</div>
+        <h3 class="dietetica-nombre">Buena vida ( ahora vende onlie)</h3>
+        <p class="dietetica-dir">Independencia 504 / Av. Libertad (VCP)</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Buena%20vida%20(%20ahora%20vende%20onlie)%20Independencia%20504%20%2F%20Av.%20Libertad%20(VCP)%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/buenavidaorganic_" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@buenavidaorganic_</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-5">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Almacén de huevos</h3>
+        <p class="dietetica-dir">Luis Agote 2667</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Almac%C3%A9n%20de%20huevos%20Luis%20Agote%202667%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/almacen.de.huevos.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@almacen.de.huevos.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Shanti</h3>
+        <p class="dietetica-dir">Altaguirre 1931</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Shanti%20Altaguirre%201931%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/shantiespacionatural" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@shantiespacionatural</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-1">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Matcha</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Matcha%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/matcha.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@matcha.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Apunto</h3>
+        <p class="dietetica-dir">Av. Pablo Ricchieri 3256</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Apunto%20Av.%20Pablo%20Ricchieri%203256%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/apuntoalmacen" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@apuntoalmacen</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-3">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">María Antonieta cerro</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Mar%C3%ADa%20Antonieta%20cerro%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/maria.antonieta.cerro.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@maria.antonieta.cerro.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-4">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">María Antonieta jardín</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Mar%C3%ADa%20Antonieta%20jard%C3%ADn%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/maria.antonieta.jardin.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@maria.antonieta.jardin.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-5">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Polidori</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Polidori%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/polidori.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@polidori.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">A confirmar</div>
+        <h3 class="dietetica-nombre">Biodiet</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Biodiet%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/biodiet.dietetica" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@biodiet.dietetica</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-1">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Oats</h3>
+        <p class="dietetica-dir">Azor Grimaut 3130</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Oats%20Azor%20Grimaut%203130%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/oats.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@oats.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Amapola ( en el norte )</h3>
+        <p class="dietetica-dir">Lascano Colodrero 2725</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Amapola%20(%20en%20el%20norte%20)%20Lascano%20Colodrero%202725%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/_amapolatiendasaludable" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@_amapolatiendasaludable</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-3">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Amapola ( en el sur )</h3>
+        <p class="dietetica-dir">Lascano Colodrero 2725</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Amapola%20(%20en%20el%20sur%20)%20Lascano%20Colodrero%202725%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/_amapolatiendasaludable" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@_amapolatiendasaludable</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-4">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Franceschini</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Franceschini%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/franceschini.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@franceschini.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-5">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Fuel natural</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Fuel%20natural%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/fuel.natural.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@fuel.natural.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Nativa</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Nativa%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/nativa.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@nativa.cba</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-1">
+        <div class="dietetica-zona">A confirmar</div>
+        <h3 class="dietetica-nombre">Tienda la abundancia</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Tienda%20la%20abundancia%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/tienda.laabundancia" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@tienda.laabundancia</a>
+        </div>
+      </div>
+      <div class="dietetica-card reveal reveal-delay-2">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Dulce membrillo</h3>
+        <p class="dietetica-dir">Jorge Borges esq. Lainez</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Dulce%20membrillo%20Jorge%20Borges%20esq.%20Lainez%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
+          </a>
+          <a href="https://instagram.com/dulce.membrillodietetica" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@dulce.membrillodietetica</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-3">
         <div class="dietetica-zona">A confirmar</div>
-        <h3 class="dietetica-nombre">Almacén de Sueltos</h3>
-        <p class="dietetica-dir">Sin dirección específica</p>
+        <h3 class="dietetica-nombre">Naturis</h3>
+        <p class="dietetica-dir">Córdoba</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Almac%C3%A9n%20de%20Sueltos%20Sin%20direcci%C3%B3n%20espec%C3%ADfica%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Naturis%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/naturis.almacen" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@naturis.almacen</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-4">
-        <div class="dietetica-zona">Sierras Chicas (Unquillo)</div>
-        <h3 class="dietetica-nombre">Almacén Natural Anahí</h3>
-        <p class="dietetica-dir">Av. San Martín 2100</p>
+        <div class="dietetica-zona">Gral Paz / Zona Norte</div>
+        <h3 class="dietetica-nombre">Pistacchio</h3>
+        <p class="dietetica-dir">Av. Gandhi 396 / Gral Paz</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Almac%C3%A9n%20Natural%20Anah%C3%AD%20Av.%20San%20Mart%C3%ADn%202100%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pistacchio%20Av.%20Gandhi%20396%20%2F%20Gral%20Paz%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/pistacchionat" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@pistacchionat</a>
         </div>
       </div>
       <div class="dietetica-card reveal reveal-delay-5">
-        <div class="dietetica-zona">Traslasierra (San Javier)</div>
-        <h3 class="dietetica-nombre">Almacén Natural "El Rocio"</h3>
-        <p class="dietetica-dir">Monseñor Ricotti</p>
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Romi</h3>
+        <p class="dietetica-dir">Córdoba</p>
         <div class="dietetica-footer">
-          <a href="https://www.google.com/maps/search/?api=1&query=Almac%C3%A9n%20Natural%20%22El%20Rocio%22%20Monse%C3%B1or%20Ricotti%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+          <a href="https://www.google.com/maps/search/?api=1&query=Romi%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Ver en Maps
           </a>
-
+          <a href="https://instagram.com/romi.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@romi.cba</a>
         </div>
       </div>
-      </div>
-        <div class="dieteticas-bottom reveal">
-          <a href="puntos-venta.html" class="btn-ver-todos">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            Ver todos los puntos de venta →
+      <div class="dietetica-card reveal">
+        <div class="dietetica-zona">Córdoba Capital</div>
+        <h3 class="dietetica-nombre">Maru</h3>
+        <p class="dietetica-dir">Córdoba</p>
+        <div class="dietetica-footer">
+          <a href="https://www.google.com/maps/search/?api=1&query=Maru%20C%C3%B3rdoba%20Cordoba%20Argentina" target="_blank" rel="noopener noreferrer" class="btn-maps">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Ver en Maps
           </a>
-        </div><div class="dieteticas-cta reveal">
-      <p>¿Sos dueño/a de una dietética o almacén saludable?</p>
-      <a href="https://api.whatsapp.com/send?phone=+5493517592984&text=Hola%21+tengo+un+negocio+y+estoy+interesado+en+la+venta+mayorista+de+tus+productos%2C+me+pasar%C3%ADas+info" target="_blank" rel="noopener noreferrer" class="btn-outline-rose">
-        Sumate como punto de venta →
-      </a>
-    </div>
-  </section>
-
-  <!-- UBICACIÓN Y HORARIOS -->
-  <section class="ubicacion" id="ubicacion">
-    <div class="ubicacion-inner">
-
-      <div class="ubicacion-info reveal">
-        <p class="section-eyebrow" style="justify-content:center;">Retiro en Córdoba</p>
-        <h2 class="section-title" style="text-align:center; font-size:clamp(2rem,3vw,3.2rem);">
-          También podés <em>venir a visitarnos</em>
-        </h2>
-
-        <div class="horarios-list">
-          <div class="horario-item reveal reveal-delay-1">
-            <div class="horario-dia">Lunes a Sábado — mañana</div>
-            <div class="horario-hora">8:30 — 13:30</div>
-          </div>
-          <div class="horario-item reveal reveal-delay-2">
-            <div class="horario-dia">Lunes a Sábado — tarde</div>
-            <div class="horario-hora">14:30 — 21:00</div>
-          </div>
-          <div class="horario-item reveal reveal-delay-3">
-            <div class="horario-dia">Domingos</div>
-            <div class="horario-hora">Cerrado</div>
-          </div>
-        </div>
-
-        <div class="ubicacion-dir reveal reveal-delay-2">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <div>
-            <strong>Av. 24 de Septiembre 1599</strong>
-            <span>Barrio General Paz · Córdoba, Argentina</span>
-          </div>
-        </div>
-
-        <a href="https://maps.app.goo.gl/D1FGTF6c6v5LjAbv8" target="_blank" rel="noopener noreferrer" class="btn-primary reveal reveal-delay-3" style="display:inline-flex; margin-top:8px;">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          Abrir en Google Maps
-        </a>
-
-      </div>
-
-      <div class="ubicacion-mapa reveal reveal-delay-2">
-        <div class="mapa-placeholder">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.5!2d-64.1952!3d-31.3892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432a2b0e1c5a5a5%3A0x0!2sAv.+24+de+Septiembre+1599%2C+General+Paz%2C+C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1"
-            width="100%"
-            height="100%"
-            style="border:0; border-radius:20px;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Ubicación Exquisiteces by Laura">
-          </iframe>
+          <a href="https://instagram.com/maru.cba" target="_blank" rel="noopener noreferrer" class="dietetica-ig">@maru.cba</a>
         </div>
       </div>
+</div>
 
-    </div>
   </section>
 
-  <!-- INSTAGRAM -->
-  
-
-  <!-- CTA FINAL -->
-  <section class="cta-final">
-    <p class="cta-final-eyebrow reveal">¿Lista para probar?</p>
-    <h2 class="cta-final-title reveal reveal-delay-1">
-      Tu primer pedido<br><em>te espera.</em>
-    </h2>
-    <p class="cta-final-sub reveal reveal-delay-2">
-      Escribinos por WhatsApp, coordinamos el pago<br>
-      y organizamos el retiro o envío a tu medida.
-    </p>
-    <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="btn-white reveal reveal-delay-3">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.122 1.528 5.859L.063 23.447a.5.5 0 0 0 .49.617l5.791-1.499A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.655-.516-5.168-1.411l-.368-.219-3.818.988.999-3.714-.241-.373A9.943 9.943 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-      Pedir por WhatsApp
-    </a>
-  </section>
-
-  </main><!-- /#main-content -->
+  </main>
 
   <!-- FOOTER -->
   <footer role="contentinfo">
@@ -3748,11 +3311,11 @@
     <div>
       <p class="footer-col-title">Productos</p>
       <div class="footer-col-links">
-        <a href="#productos">Alfajores de almendra</a>
-        <a href="#productos">Budines artesanales</a>
-        <a href="#productos">Cookies de avena</a>
-        <a href="#productos">Las Quinas (DDL, Mieles, Mermeladas)</a>
-        <a href="#productos">Kit regalo premium</a>
+        <a href="index.html#productos">Alfajores de almendra</a>
+        <a href="index.html#productos">Budines artesanales</a>
+        <a href="index.html#productos">Cookies de avena</a>
+        <a href="index.html#productos">Las Quinas (DDL, Mieles, Mermeladas)</a>
+        <a href="index.html#productos">Kit regalo premium</a>
       </div>
     </div>
 
@@ -3760,10 +3323,10 @@
     <div>
       <p class="footer-col-title">Información</p>
       <div class="footer-col-links">
-        <a href="#como-pedir">Cómo pedir</a>
-        <a href="#dieteticas">Dónde encontrarnos</a>
-        <a href="#filosofia">Nuestra historia</a>
-        <a href="https://api.whatsapp.com/send?phone=+5493517592984&text=Hola%21+tengo+un+negocio+y+estoy+interesado+en+la+venta+mayorista+de+tus+productos%2C+me+pasar%C3%ADas+info" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer">Para dietéticas →</a>
+        <a href="index.html#como-pedir">Cómo pedir</a>
+        <a href="index.html#dieteticas">Dónde encontrarnos</a>
+        <a href="index.html#filosofia">Nuestra historia</a>
+        <a href="https://api.whatsapp.com/send?phone=+3517592984&text=Hola%21+tengo+un+negocio+y+estoy+interesado+en+la+venta+mayorista+de+tus+productos%2C+me+pasar%C3%ADas+info" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer">Para dietéticas →</a>
       </div>
     </div>
 
@@ -3774,7 +3337,7 @@
         <a href="https://www.instagram.com/exquisiteces.lau/" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="social-link" aria-label="Instagram @exquisiteces.lau">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
-        <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
+        <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.122 1.528 5.859L.063 23.447a.5.5 0 0 0 .49.617l5.791-1.499A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.655-.516-5.168-1.411l-.368-.219-3.818.988.999-3.714-.241-.373A9.943 9.943 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
         </a>
       </div>
@@ -3789,9 +3352,9 @@
     <div class="footer-copy">
       <span>© 2026 Exquisiteces by Laura · Córdoba, Argentina</span>
       <div class="footer-copy-links">
-        <a href="#productos">Productos</a>
-        <a href="#como-pedir">Cómo pedir</a>
-        <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="index.html#productos">Productos</a>
+        <a href="index.html#como-pedir">Cómo pedir</a>
+        <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </div>
 
@@ -3799,7 +3362,7 @@
 
   <!-- WHATSAPP FLOTANTE -->
   <div class="whatsapp-float">
-    <a href="https://api.whatsapp.com/send/?phone=5493512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" title="Pedir por WhatsApp">
+    <a href="https://api.whatsapp.com/send/?phone=3512051505&text=Hola+Exqusiteces+quisiera+realizar+un+pedido%21&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" title="Pedir por WhatsApp">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.122 1.528 5.859L.063 23.447a.5.5 0 0 0 .49.617l5.791-1.499A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.655-.516-5.168-1.411l-.368-.219-3.818.988.999-3.714-.241-.373A9.943 9.943 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
     </a>
   </div>
@@ -3808,50 +3371,33 @@
     // Remove no-js class
     document.body.classList.remove('no-js');
 
-    // Hamburger menu — hardened
+    // Hamburger menu
     const toggle = document.querySelector('.nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const closeMenu = () => {
-      navMenu.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Abrir menú');
-      document.body.style.overflow = '';
-    };
-    const openMenu = () => {
-      navMenu.classList.add('open');
-      toggle.setAttribute('aria-expanded', 'true');
-      toggle.setAttribute('aria-label', 'Cerrar menú');
-    };
-    toggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      navMenu.classList.contains('open') ? closeMenu() : openMenu();
+    toggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
-    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    navMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
     document.addEventListener('click', e => {
-      if (!e.target.closest('nav') && navMenu.classList.contains('open')) closeMenu();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && navMenu.classList.contains('open')) closeMenu();
-    });
-    // Cerrar al cambiar a desktop para evitar estados inconsistentes
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768 && navMenu.classList.contains('open')) closeMenu();
+      if (!e.target.closest('nav') && navMenu.classList.contains('open')) {
+        navMenu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menú');
+      }
     });
 
-    // Nav scroll effect + parallax orgánico
+    // Nav scroll effect
     const nav = document.getElementById('nav');
-    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const y = window.scrollY;
-          nav.classList.toggle('scrolled', y > 60);
-          document.body.classList.toggle('scrolled', y > 120);
-          document.documentElement.style.setProperty('--scroll-y', y);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
     // Scroll reveal
@@ -3874,29 +3420,21 @@
       });
     });
 
-    // Catalog filters — con empty-state y refresh reveal
+    // Catalog filters
     const filterBtns = document.querySelectorAll('.filter-btn');
     const productCards = document.querySelectorAll('.producto-card');
-    const productosGrid = document.querySelector('.productos-grid');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        let visibleCount = 0;
         productCards.forEach(card => {
-          const match = filter === 'todo' || card.dataset.category === filter;
-          card.style.display = match ? '' : 'none';
-          if (match) {
-            visibleCount++;
-            card.classList.remove('visible');
-            // re-trigger reveal
-            requestAnimationFrame(() => card.classList.add('visible'));
+          if (filter === 'todo' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
           }
         });
-        if (productosGrid) {
-          productosGrid.dataset.empty = visibleCount === 0 ? 'true' : 'false';
-        }
       });
     });
 
@@ -3935,9 +3473,7 @@
       const nombre = card.querySelector('.producto-nombre')?.textContent?.trim() || '';
       if (!nombre) return;
       const msg = encodeURIComponent(`Hola Exquisiteces! Quisiera consultar por: ${nombre}`);
-      const waUrl = `https://api.whatsapp.com/send/?phone=5493512051505&text=${msg}&type=phone_number&app_absent=0`;
-      // ensure float WA button also works
-
+      const waUrl = `https://api.whatsapp.com/send/?phone=3512051505&text=${msg}&type=phone_number&app_absent=0`;
       
       // Update "Pedir →" link
       const pedirLink = card.querySelector('.producto-pedir');
