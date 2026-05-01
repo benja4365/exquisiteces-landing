@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://esm.sh https://lottie.host https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://lottie.host https://*.lottiefiles.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://esm.sh https://lottie.host https://*.lottiefiles.com;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estado de tu pedido — Exquisiteces by Laura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Nunito:wght@300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/cart.css">
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.5/dist/dotlottie-wc.js" type="module"></script>
+<style>
+:root{
+  --fucsia:#C8185A;--fucsia-d:#A31249;--fucsia-l:#F5B8D9;--fucsia-pale:#FCF3F8;
+  --miel:#E0A545;--cacao:#2A1320;--cream:#F8F6F7;--cream-d:#EDE8EC;--paper:#FDFCFC;
+  --green:#558564;--ink:#2A1320;--ink-m:#7E586D;--ink-f:#AA929F;
+  --ff-d:'Fraunces',Georgia,serif;--ff-b:'Nunito',system-ui,sans-serif;
+  --r-pill:999px;--r-lg:22px;
+  --sh-f:0 12px 28px rgba(200,24,90,.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:var(--ff-b);color:var(--ink);min-height:100vh;line-height:1.6}
+a{color:var(--fucsia);text-decoration:none}
+a:hover{color:var(--fucsia-d)}
+
+.topnav{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--cream-d);background:var(--paper)}
+.topnav .logo{font-family:var(--ff-d);font-style:italic;font-weight:600;font-size:1.15rem;color:var(--ink)}
+.topnav .home{color:var(--ink-m);font-size:.85rem;font-weight:600}
+
+.wrap{max-width:680px;margin:48px auto;padding:0 22px}
+.card{
+  background:var(--paper);border-radius:24px;padding:38px 32px;
+  box-shadow:0 12px 38px rgba(42,19,32,.07);
+  border:1px solid var(--cream-d);
+  text-align:center
+}
+.eye{color:var(--miel);font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+.title{font-family:var(--ff-d);font-style:italic;font-weight:300;font-size:clamp(1.85rem,4vw,2.6rem);color:var(--ink);line-height:1.1;margin-bottom:14px}
+.subtitle{color:var(--ink-m);font-size:1rem;margin-bottom:30px}
+.lottie-wrap{width:240px;height:240px;margin:0 auto 20px}
+
+.steps{display:flex;justify-content:space-between;gap:8px;max-width:520px;margin:0 auto 30px;position:relative}
+.steps::before{content:'';position:absolute;top:18px;left:8%;right:8%;height:2px;background:var(--cream-d);z-index:0}
+.step{position:relative;z-index:1;text-align:center;flex:1}
+.step-dot{width:36px;height:36px;border-radius:50%;background:var(--cream-d);color:var(--ink-m);display:grid;place-items:center;margin:0 auto 8px;font-weight:700;font-size:.85rem;transition:all .35s}
+.step.done .step-dot{background:var(--fucsia);color:#fff}
+.step.active .step-dot{background:var(--fucsia);color:#fff;box-shadow:0 0 0 6px var(--fucsia-pale);animation:pulse 1.6s ease-in-out infinite}
+.step-l{font-size:.78rem;font-weight:600;color:var(--ink-m)}
+.step.done .step-l,.step.active .step-l{color:var(--ink)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 6px var(--fucsia-pale)}50%{box-shadow:0 0 0 12px var(--fucsia-pale)}}
+
+.detail{background:var(--cream);border-radius:14px;padding:18px 20px;text-align:left;margin-top:24px}
+.detail h4{font-family:var(--ff-d);font-style:italic;color:var(--ink);font-size:1.05rem;margin-bottom:10px}
+.detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--cream-d);font-size:.86rem}
+.detail-row:last-child{border-bottom:0}
+.detail-row span{color:var(--ink-m)}
+.detail-row b{color:var(--ink);font-weight:700}
+.total-row{padding-top:10px;margin-top:6px;border-top:1.5px solid var(--ink)}
+.total-row b{font-family:var(--ff-d);font-size:1.2rem;font-style:italic;color:var(--fucsia)}
+
+.envio-form{margin-top:24px;text-align:left}
+.envio-form label{display:block;margin-top:10px;font-size:.82rem;color:var(--ink-m);font-weight:600}
+.envio-form input{width:100%;padding:11px 14px;margin-top:5px;background:var(--cream);border:1.5px solid var(--cream-d);border-radius:10px;font-family:var(--ff-b);font-size:.9rem}
+.envio-form input:focus{outline:none;border-color:var(--fucsia)}
+.envio-btn{margin-top:14px;width:100%;background:var(--fucsia);color:#fff;border:0;padding:14px 22px;border-radius:14px 10px 12px 16px / 10px 15px 12px 14px;font-weight:700;cursor:pointer;box-shadow:var(--sh-f)}
+.envio-btn:hover:not(:disabled){background:var(--fucsia-d)}
+.envio-btn:disabled{opacity:.6;cursor:wait}
+
+.notfound{padding:60px 20px;color:var(--ink-m)}
+.notfound h2{font-family:var(--ff-d);font-style:italic;color:var(--ink);font-size:1.6rem;margin-bottom:10px}
+
+.aviso{margin-top:14px;padding:10px;border-radius:8px;font-size:.85rem}
+.aviso.ok{background:#E8F4EA;color:var(--green)}
+.aviso.err{background:var(--fucsia-pale);color:var(--fucsia-d)}
+
+@media(max-width:520px){
+  .wrap{margin:24px auto;padding:0 14px}
+  .card{padding:28px 22px}
+  .lottie-wrap{width:180px;height:180px}
+}
+</style>
+</head>
+<body>
+<header class="topnav">
+  <a href="index.html" class="logo">Exquisiteces by Laura</a>
+  <a href="index.html" class="home">← Volver al inicio</a>
+</header>
+
+<div class="wrap">
+  <div id="estado-card" class="card">
+    <div class="lottie-wrap" id="lottie-slot"></div>
+    <p class="eye" id="estado-eye">Cargando...</p>
+    <h1 class="title" id="estado-title">Buscando tu pedido</h1>
+    <p class="subtitle" id="estado-sub">Un momento por favor.</p>
+    <div id="contenido-extra"></div>
+  </div>
+</div>
+
+<script type="module">
+import { getPedidoPorId, suscribirPedido, subirCapturaEnvio } from './js/supabase-client.js';
+import { pedidoActivo } from './js/cart.js';
+
+const params = new URLSearchParams(location.search);
+const pedidoId = params.get('id') || pedidoActivo.get();
+
+const eye = document.getElementById('estado-eye');
+const title = document.getElementById('estado-title');
+const sub = document.getElementById('estado-sub');
+const slot = document.getElementById('lottie-slot');
+const extra = document.getElementById('contenido-extra');
+const fmt = n => '$' + (n||0).toLocaleString('es-AR');
+
+const LOTTIE = {
+  pendiente: 'https://lottie.host/c3eaf5b0-77eb-4c79-a7fb-8a5a31bf38f6/0nWXQ4z6mZ.lottie',
+  confirmado: 'https://lottie.host/4f548dba-9d6a-4a4f-92a9-87b7c5c4b3c0/UMhVvKL3Hx.lottie',
+  en_camino: 'https://lottie.host/e3fbc835-9c99-4c6a-9e01-6a1cba9f7d7c/4XVApY1Awr.lottie',
+  retirado: 'https://lottie.host/4f548dba-9d6a-4a4f-92a9-87b7c5c4b3c0/UMhVvKL3Hx.lottie'
+};
+
+function setLottie(estado){
+  const url = LOTTIE[estado] || LOTTIE.pendiente;
+  slot.innerHTML = `<dotlottie-wc src="${url}" autoplay loop style="width:100%;height:100%"></dotlottie-wc>`;
+}
+
+function renderResumen(p){
+  const items = Array.isArray(p.items) ? p.items : (typeof p.items === 'string' ? JSON.parse(p.items) : []);
+  return `
+    <div class="detail">
+      <h4>Detalle del pedido #${String(p.numero||'').padStart(4,'0')}</h4>
+      ${items.map(i => `<div class="detail-row"><span>${i.nombre} ×${i.cantidad}</span><b>${fmt((i.precio_30 && p.descuento ? i.precio_30 : i.precio) * i.cantidad)}</b></div>`).join('')}
+      <div class="detail-row"><span>Entrega</span><b>${p.entrega === 'envio' ? 'Envío' : 'Retiro en local'}</b></div>
+      <div class="detail-row total-row"><span>Total</span><b>${fmt(p.total)}</b></div>
+    </div>`;
+}
+
+function renderPendiente(p){
+  setLottie('pendiente');
+  eye.textContent = 'Pago en revisión';
+  title.textContent = 'Recibimos tu comprobante';
+  sub.textContent = 'Estamos verificando el pago. En cuanto lo confirmemos te avisamos por email.';
+  extra.innerHTML = renderResumen(p);
+}
+
+function renderConfirmado(p){
+  setLottie('confirmado');
+  eye.textContent = '¡Pago confirmado!';
+  title.textContent = '¡Tu pedido está listo!';
+  if (p.entrega === 'retiro'){
+    sub.textContent = 'Pasá a retirarlo por Av. 24 de Septiembre 1599, Bº General Paz. Lun a Sáb 8:30–13:30 / 14:30–21:00.';
+    extra.innerHTML = renderResumen(p);
+  } else {
+    sub.textContent = 'Coordinamos el envío. Cuando llegue, subí la captura del repartidor para que sepamos que llegó bien.';
+    extra.innerHTML = renderResumen(p) + `
+      <form class="envio-form" id="envio-form">
+        <label>Nombre del repartidor o app
+          <input name="repartidor" type="text" required placeholder="Ej: Cabify - Pedro G."/>
+        </label>
+        <label>Captura de la app de delivery
+          <input name="captura" type="file" accept="image/*" required/>
+        </label>
+        <button type="submit" class="envio-btn">Confirmar entrega →</button>
+        <p id="envio-aviso" class="aviso"></p>
+      </form>`;
+
+    document.getElementById('envio-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target;
+      const aviso = document.getElementById('envio-aviso');
+      const btn = f.querySelector('.envio-btn');
+      btn.disabled = true; btn.textContent = 'Subiendo...';
+      try {
+        await subirCapturaEnvio(p.id, f.captura.files[0], f.repartidor.value);
+        aviso.textContent = '✓ Captura recibida. ¡Gracias!';
+        aviso.className = 'aviso ok';
+      } catch (err) {
+        aviso.textContent = '⚠ ' + (err.message || 'No pudimos subir la imagen.');
+        aviso.className = 'aviso err';
+        btn.disabled = false; btn.textContent = 'Confirmar entrega →';
+      }
+    });
+  }
+}
+
+function renderEnCamino(p){
+  setLottie('en_camino');
+  eye.textContent = 'En camino';
+  title.textContent = '¡Tu pedido va para allá!';
+  sub.textContent = `Lo lleva ${p.envio_repartidor || 'el repartidor'}. Ya recibimos la confirmación del envío.`;
+  extra.innerHTML = renderResumen(p);
+}
+
+function renderRetirado(p){
+  setLottie('retirado');
+  eye.textContent = 'Pedido entregado';
+  title.textContent = '¡Disfrutalo!';
+  sub.innerHTML = 'Gracias por elegir Exquisiteces. ¿Te gustó? <a href="https://instagram.com/exquisiteces.lau" target="_blank">Etiquetanos en Instagram</a>.';
+  extra.innerHTML = renderResumen(p) + `
+    <p style="margin-top:18px"><a href="index.html#productos">Hacer otro pedido →</a></p>`;
+  pedidoActivo.clear();
+}
+
+function renderCancelado(p){
+  eye.textContent = 'Cancelado';
+  title.textContent = 'Pedido cancelado';
+  sub.textContent = 'Si esto fue un error, escribinos por Instagram @exquisiteces.lau.';
+  extra.innerHTML = renderResumen(p);
+  pedidoActivo.clear();
+}
+
+function pintar(p){
+  const r = ({
+    pendiente: renderPendiente,
+    confirmado: renderConfirmado,
+    en_camino: renderEnCamino,
+    retirado: renderRetirado,
+    cancelado: renderCancelado
+  })[p.estado] || renderPendiente;
+  r(p);
+}
+
+(async () => {
+  if (!pedidoId){
+    document.getElementById('estado-card').innerHTML = `<div class="notfound"><h2>No encontramos tu pedido</h2><p>El link no incluye un ID válido. <a href="index.html">Volver al inicio</a>.</p></div>`;
+    return;
+  }
+  const p = await getPedidoPorId(pedidoId);
+  if (!p){
+    document.getElementById('estado-card').innerHTML = `<div class="notfound"><h2>Pedido no encontrado</h2><p>Puede que el ID sea incorrecto o que aún no esté en el sistema. <a href="index.html">Volver al inicio</a>.</p></div>`;
+    return;
+  }
+  pintar(p);
+  suscribirPedido(p.id, actualizado => pintar(actualizado));
+})();
+</script>
+</body>
+</html>

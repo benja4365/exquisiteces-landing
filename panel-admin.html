@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.emailjs.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.emailjs.com https://esm.sh;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel admin — Exquisiteces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400..700;1,400&family=Nunito:wght@300..900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root{
+  --fucsia:#C8185A;--fucsia-d:#A31249;--fucsia-pale:#FCF3F8;
+  --green:#558564;--cream:#F8F6F7;--cream-d:#EDE8EC;--paper:#FDFCFC;
+  --ink:#2A1320;--ink-m:#7E586D;--ink-f:#AA929F;
+  --ff-d:'Fraunces',Georgia,serif;--ff-b:'Nunito',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--ff-b);min-height:100vh}
+a{color:var(--fucsia);text-decoration:none}
+
+/* LOGIN */
+#login{position:fixed;inset:0;display:grid;place-items:center;background:var(--cream);z-index:100}
+.login-box{background:var(--paper);padding:40px;border-radius:22px;width:min(400px,100%);box-shadow:0 14px 38px rgba(42,19,32,.1);text-align:center}
+.login-box h1{font-family:var(--ff-d);font-style:italic;font-weight:400;font-size:1.7rem;margin-bottom:8px;color:var(--ink)}
+.login-box p{color:var(--ink-m);margin-bottom:24px;font-size:.9rem}
+.login-box input{width:100%;padding:13px 16px;border:1.5px solid var(--cream-d);border-radius:12px;background:var(--cream);font-size:1rem;font-family:var(--ff-b);margin-bottom:14px}
+.login-box input:focus{outline:none;border-color:var(--fucsia)}
+.login-box button{width:100%;background:var(--fucsia);color:#fff;border:0;padding:13px;border-radius:12px;font-weight:700;cursor:pointer;font-size:.95rem}
+.login-box button:hover{background:var(--fucsia-d)}
+.login-err{color:var(--fucsia-d);font-size:.84rem;margin-top:10px;display:none}
+.login-err.show{display:block}
+
+/* PANEL */
+#panel{display:none;min-height:100vh}
+#panel.show{display:block}
+
+.adm-nav{background:var(--paper);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--cream-d);position:sticky;top:0;z-index:10}
+.adm-nav h1{font-family:var(--ff-d);font-style:italic;font-weight:500;font-size:1.2rem;color:var(--ink)}
+.adm-nav .right{display:flex;gap:12px;align-items:center}
+.adm-nav button{background:transparent;border:1px solid var(--cream-d);padding:8px 14px;border-radius:999px;font-size:.82rem;color:var(--ink-m);cursor:pointer;font-family:var(--ff-b)}
+.adm-nav button:hover{border-color:var(--fucsia);color:var(--fucsia)}
+.adm-nav button.on{background:var(--fucsia);color:#fff;border-color:var(--fucsia)}
+
+main{padding:28px}
+.tabsec{display:none;max-width:1200px;margin:0 auto}
+.tabsec.show{display:block}
+
+h2.sec-t{font-family:var(--ff-d);font-style:italic;font-size:1.7rem;margin-bottom:18px;color:var(--ink)}
+
+/* PEDIDOS */
+.pedido-list{display:flex;flex-direction:column;gap:14px}
+.pedido{background:var(--paper);border-radius:18px;padding:20px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;box-shadow:0 4px 14px rgba(42,19,32,.05);border:1px solid var(--cream-d)}
+.pedido-num{font-family:var(--ff-d);font-style:italic;font-size:1.6rem;color:var(--fucsia);font-weight:600;align-self:center}
+.pedido-info h3{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.pedido-info small{color:var(--ink-m);font-size:.82rem;display:block;line-height:1.5}
+.pedido-items{margin-top:10px;font-size:.82rem;color:var(--ink-m);line-height:1.7}
+.pedido-acts{display:flex;flex-direction:column;gap:8px;align-items:flex-end;justify-content:center}
+.pedido-acts .total{font-family:var(--ff-d);font-style:italic;font-weight:600;color:var(--ink);font-size:1.4rem}
+.pedido-acts a,.pedido-acts button{font-size:.78rem;padding:7px 14px;border-radius:999px;border:0;cursor:pointer;font-weight:700;font-family:var(--ff-b)}
+.btn-confirm{background:var(--green);color:#fff}
+.btn-finalizar{background:var(--fucsia);color:#fff}
+.btn-comprobante{background:var(--cream);color:var(--ink-m);border:1px solid var(--cream-d)}
+.btn-comprobante:hover{background:var(--fucsia-pale);color:var(--fucsia)}
+.btn-cancelar{background:transparent;color:var(--ink-f);border:1px solid var(--cream-d)}
+.estado-tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.estado-tag.pendiente{background:#FFF4D6;color:#A07000}
+.estado-tag.confirmado{background:#DAF1DD;color:var(--green)}
+.estado-tag.en_camino{background:var(--fucsia-pale);color:var(--fucsia)}
+.estado-tag.retirado{background:var(--cream-d);color:var(--ink-m)}
+.estado-tag.cancelado{background:#F4D6D6;color:#A03030}
+
+/* STOCK */
+.stock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.stock-item{background:var(--paper);padding:14px;border-radius:14px;display:flex;align-items:center;gap:12px;border:1px solid var(--cream-d)}
+.stock-item img{width:54px;height:54px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--cream-d)}
+.stock-item-body{flex:1;min-width:0}
+.stock-item h4{font-size:.9rem;color:var(--ink);font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stock-item small{font-size:.75rem;color:var(--ink-m)}
+.toggle{position:relative;width:46px;height:26px;background:#D2D2D2;border-radius:99px;cursor:pointer;transition:background .25s;flex-shrink:0}
+.toggle.on{background:var(--green)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .25s;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.toggle.on::after{transform:translateX(20px)}
+
+.cat-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.cat-tabs button{background:var(--paper);border:1px solid var(--cream-d);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:.82rem;font-family:var(--ff-b);color:var(--ink-m)}
+.cat-tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+.empty{text-align:center;padding:60px 20px;color:var(--ink-m)}
+.empty h3{font-family:var(--ff-d);font-style:italic;color:var(--ink);font-size:1.5rem;margin-bottom:6px}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--cream);padding:12px 22px;border-radius:999px;font-weight:600;font-size:.88rem;opacity:0;transition:all .3s;z-index:200}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:680px){
+  .pedido{grid-template-columns:1fr;gap:12px}
+  .pedido-acts{align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <form class="login-box" id="login-form">
+    <h1>Panel admin</h1>
+    <p>Acceso interno · Exquisiteces by Laura</p>
+    <input type="password" id="pwd" placeholder="Contraseña" autofocus required/>
+    <button type="submit">Ingresar</button>
+    <p class="login-err" id="login-err">Contraseña incorrecta.</p>
+  </form>
+</div>
+
+<div id="panel">
+  <header class="adm-nav">
+    <h1>Exquisiteces · Admin</h1>
+    <div class="right">
+      <button class="tab-btn on" data-tab="pedidos">Pedidos</button>
+      <button class="tab-btn" data-tab="stock">Stock</button>
+      <button id="logout">Salir</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="tabsec show" id="tab-pedidos">
+      <h2 class="sec-t">Pedidos en curso</h2>
+      <div class="pedido-list" id="pedidos-list"><div class="empty"><h3>Cargando...</h3></div></div>
+    </section>
+
+    <section class="tabsec" id="tab-stock">
+      <h2 class="sec-t">Gestión de stock</h2>
+      <div class="cat-tabs" id="cat-tabs">
+        <button class="on" data-c="all">Todos</button>
+        <button data-c="dulce">Dulces</button>
+        <button data-c="salado">Salados</button>
+        <button data-c="quinas">Las Quinas</button>
+      </div>
+      <div class="stock-grid" id="stock-grid"></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { ADMIN_PASSWORD, EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from './js/config.js';
+import {
+  getProductos, suscribirProductos, actualizarStock,
+  getPedidosActivos, suscribirPedidos, actualizarEstadoPedido
+} from './js/supabase-client.js';
+
+// LOGIN
+const KEY = 'exq_admin_session';
+const loginEl = document.getElementById('login');
+const panelEl = document.getElementById('panel');
+
+function entrar(){
+  loginEl.style.display='none';
+  panelEl.classList.add('show');
+  initEmailJS();
+  cargarPedidos();
+  cargarStock();
+}
+
+if (sessionStorage.getItem(KEY) === '1') entrar();
+
+document.getElementById('login-form').addEventListener('submit', e=>{
+  e.preventDefault();
+  const v = document.getElementById('pwd').value;
+  if (v === ADMIN_PASSWORD){
+    sessionStorage.setItem(KEY,'1');
+    document.getElementById('login-err').classList.remove('show');
+    entrar();
+  } else {
+    document.getElementById('login-err').classList.add('show');
+  }
+});
+document.getElementById('logout').addEventListener('click', ()=>{
+  sessionStorage.removeItem(KEY);
+  location.reload();
+});
+
+// TABS
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tabsec').forEach(x=>x.classList.remove('show'));
+  b.classList.add('on');
+  document.getElementById('tab-'+b.dataset.tab).classList.add('show');
+}));
+
+// EMAILJS
+function initEmailJS(){
+  if (window.emailjs && !EMAILJS_PUBLIC_KEY.includes('TU-PUBLIC-KEY')){
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+}
+
+async function notificarPagoConfirmado(p){
+  if (!window.emailjs || EMAILJS_PUBLIC_KEY.includes('TU-PUBLIC-KEY')){
+    console.warn('EmailJS no configurado — no se envió email');
+    return;
+  }
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: p.cliente_email,
+      to_name: p.cliente_nombre,
+      pedido_numero: String(p.numero||'').padStart(4,'0'),
+      pedido_total: '$' + (p.total||0).toLocaleString('es-AR'),
+      pedido_url: location.origin + location.pathname.replace('panel-admin.html','estado.html') + '?id=' + p.id,
+      entrega: p.entrega === 'envio' ? 'Envío' : 'Retiro en local'
+    });
+    toast('Email enviado a ' + p.cliente_email);
+  } catch (err){
+    console.error(err);
+    toast('⚠ No se pudo enviar el email: ' + err.text);
+  }
+}
+
+// PEDIDOS
+const fmt = n => '$' + (n||0).toLocaleString('es-AR');
+const listaPedidos = document.getElementById('pedidos-list');
+
+async function cargarPedidos(){
+  const pedidos = await getPedidosActivos();
+  if (!pedidos.length){
+    listaPedidos.innerHTML = '<div class="empty"><h3>Todo tranquilo</h3><p>No hay pedidos activos en este momento.</p></div>';
+    return;
+  }
+  listaPedidos.innerHTML = pedidos.map(p => {
+    const items = Array.isArray(p.items) ? p.items : (typeof p.items === 'string' ? JSON.parse(p.items) : []);
+    return `
+      <article class="pedido" data-id="${p.id}">
+        <div class="pedido-num">#${String(p.numero||'').padStart(4,'0')}</div>
+        <div class="pedido-info">
+          <h3>${p.cliente_nombre}</h3>
+          <small>📧 ${p.cliente_email} · 📞 ${p.cliente_telefono}</small>
+          <small>${p.entrega === 'envio' ? 'Envío a: ' + (p.direccion || '-') : 'Retiro en local'}</small>
+          <small>${new Date(p.created_at).toLocaleString('es-AR')}</small>
+          <div class="pedido-items">${items.map(i=>`${i.nombre} ×${i.cantidad}`).join(' · ')}</div>
+          <span class="estado-tag ${p.estado}">${p.estado.replace('_',' ')}</span>
+        </div>
+        <div class="pedido-acts">
+          <span class="total">${fmt(p.total)}</span>
+          ${p.comprobante_url ? `<a href="${p.comprobante_url}" target="_blank" rel="noopener" class="btn-comprobante">Ver comprobante</a>` : ''}
+          ${p.estado === 'pendiente' ? `<button class="btn-confirm" data-act="confirmar" data-id="${p.id}">✓ Confirmar pago</button>` : ''}
+          ${(p.estado === 'confirmado' || p.estado === 'en_camino') ? `<button class="btn-finalizar" data-act="finalizar" data-id="${p.id}">Marcar como entregado</button>` : ''}
+          ${p.estado === 'pendiente' ? `<button class="btn-cancelar" data-act="cancelar" data-id="${p.id}">Cancelar</button>` : ''}
+        </div>
+      </article>`;
+  }).join('');
+
+  listaPedidos.querySelectorAll('button[data-act]').forEach(b=>b.addEventListener('click', async ()=>{
+    const id = b.dataset.id;
+    const act = b.dataset.act;
+    const pedido = pedidos.find(x=>x.id===id);
+    b.disabled = true;
+    try {
+      if (act === 'confirmar'){
+        await actualizarEstadoPedido(id, 'confirmado');
+        await notificarPagoConfirmado(pedido);
+        toast('Pedido confirmado');
+      } else if (act === 'finalizar'){
+        await actualizarEstadoPedido(id, 'retirado');
+        toast('Pedido archivado como entregado');
+      } else if (act === 'cancelar'){
+        if (!confirm('¿Cancelar este pedido?')) { b.disabled=false; return; }
+        await actualizarEstadoPedido(id, 'cancelado');
+        toast('Pedido cancelado');
+      }
+    } catch(err){
+      console.error(err);
+      toast('⚠ Error: ' + err.message);
+      b.disabled = false;
+    }
+  }));
+}
+
+suscribirPedidos(() => cargarPedidos());
+
+// STOCK
+const stockGrid = document.getElementById('stock-grid');
+let productosGlobal = [];
+let catActiva = 'all';
+
+async function cargarStock(){
+  productosGlobal = await getProductos();
+  renderStock();
+}
+
+function renderStock(){
+  const filtro = catActiva === 'all' ? productosGlobal : productosGlobal.filter(p => p.categoria === catActiva);
+  if (!filtro.length){
+    stockGrid.innerHTML = '<div class="empty"><h3>Sin productos</h3></div>';
+    return;
+  }
+  stockGrid.innerHTML = filtro.map(p => `
+    <div class="stock-item" data-id="${p.id}">
+      <img src="${p.imagen || ''}" alt="" onerror="this.style.visibility='hidden'"/>
+      <div class="stock-item-body">
+        <h4>${p.nombre}</h4>
+        <small>${p.categoria} · $${(p.precio||0).toLocaleString('es-AR')}</small>
+      </div>
+      <div class="toggle ${p.con_stock ? 'on' : ''}" role="switch" aria-checked="${p.con_stock}" tabindex="0"></div>
+    </div>`).join('');
+
+  stockGrid.querySelectorAll('.toggle').forEach(t=>{
+    const item = t.closest('.stock-item');
+    const id = item.dataset.id;
+    t.addEventListener('click', async ()=>{
+      const nuevo = !t.classList.contains('on');
+      t.classList.toggle('on', nuevo);
+      try {
+        await actualizarStock(id, nuevo);
+        const p = productosGlobal.find(x=>x.id===id);
+        if (p) p.con_stock = nuevo;
+        toast(nuevo ? '✓ Con stock' : '✗ Sin stock');
+      } catch(err){
+        t.classList.toggle('on', !nuevo);
+        toast('⚠ Error: ' + err.message);
+      }
+    });
+  });
+}
+
+document.querySelectorAll('#cat-tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#cat-tabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  catActiva = b.dataset.c;
+  renderStock();
+}));
+
+suscribirProductos(actualizado => {
+  const idx = productosGlobal.findIndex(p => p.id === actualizado.id);
+  if (idx >= 0) { productosGlobal[idx] = actualizado; renderStock(); }
+});
+
+// TOAST
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 2400);
+}
+</script>
+</body>
+</html>
